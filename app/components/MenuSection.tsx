@@ -1,14 +1,17 @@
-import Image from "next/image";
+import Image from 'next/image'
 import {
   MENU_CATEGORIES,
   MENU_NOTES,
   PRINTED_MENU_ALT,
   PRINTED_MENU_SRC,
-} from "@/lib/menu";
+} from '@/lib/menu'
 
 export function MenuSection() {
   return (
-    <section id="menu" className="scroll-mt-24 bg-[var(--pn-cream)] py-14 sm:py-20">
+    <section
+      id="menu"
+      className="scroll-mt-24 bg-[var(--pn-cream)] py-14 sm:py-20"
+    >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 text-center">
           <span className="inline-block rounded-full bg-[var(--pn-purple)]/10 px-4 py-1 text-sm font-bold text-[var(--pn-purple)]">
@@ -23,14 +26,14 @@ export function MenuSection() {
         </div>
 
         <div className="space-y-16">
-          {MENU_CATEGORIES.map((cat) => (
+          {MENU_CATEGORIES.map(cat => (
             <div key={cat.id}>
               <h3 className="mb-6 flex items-center gap-3 text-xl font-bold text-[var(--pn-red)]">
                 <span className="h-1 w-8 rounded-full bg-[var(--pn-orange)]" />
                 {cat.title}
               </h3>
               <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {cat.items.map((item) => (
+                {cat.items.map(item => (
                   <li
                     key={`${cat.id}-${item.name}`}
                     className="flex overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-sm transition hover:shadow-md"
@@ -45,9 +48,13 @@ export function MenuSection() {
                       />
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col justify-center p-3 sm:p-4">
-                      <p className="break-words font-bold leading-snug text-zinc-900">{item.name}</p>
+                      <p className="break-words font-bold leading-snug text-zinc-900">
+                        {item.name}
+                      </p>
                       {item.note ? (
-                        <p className="mt-1 text-xs text-zinc-500">{item.note}</p>
+                        <p className="mt-1 text-xs text-zinc-500">
+                          {item.note}
+                        </p>
                       ) : null}
                       <p className="mt-2 text-lg font-extrabold text-[var(--pn-purple)]">
                         {item.price}
@@ -61,7 +68,7 @@ export function MenuSection() {
         </div>
 
         <div className="mt-12 rounded-2xl border border-dashed border-[var(--pn-gold)]/60 bg-white/60 p-5 text-center text-sm font-medium text-zinc-700">
-          {MENU_NOTES.map((line) => (
+          {MENU_NOTES.map(line => (
             <p key={line} className="py-1">
               {line}
             </p>
@@ -88,5 +95,5 @@ export function MenuSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

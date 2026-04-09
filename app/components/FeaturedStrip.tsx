@@ -3,23 +3,28 @@ import Image from "next/image";
 export function FeaturedStrip() {
   return (
     <section className="border-y border-zinc-200 bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6">
-        <article className="group overflow-hidden rounded-3xl border border-zinc-100 bg-[var(--pn-cream)] shadow-sm transition hover:shadow-md">
-          <div className="relative aspect-[16/10] w-full">
+      <div className="mx-auto max-w-md px-4 py-6 sm:px-5 sm:py-8">
+        <article className="group overflow-hidden rounded-2xl border border-zinc-100 bg-[var(--pn-cream)] shadow-sm transition hover:shadow-md">
+          <div className="relative aspect-[16/9] w-full">
             <Image
-              src="/images/kutchhi-dabeli.png"
-              alt="કચ્છી દાબેલી"
+              src="/images/featured-cheese-masala-pakwan.jpg"
+              alt="ચીઝ મસાલા પકવાન — Patel Nasta Hub"
               fill
-              className="object-cover transition duration-500 group-hover:scale-[1.02]"
-              sizes="(max-width: 672px) 100vw, 672px"
+              className="object-cover object-center transition duration-500 group-hover:scale-[1.02]"
+              sizes="(max-width: 448px) 100vw, 448px"
             />
           </div>
-          <div className="p-5">
-            <h2 className="text-xl font-bold text-[var(--pn-red)]">
-              કચ્છી દાબેલીનો અનુભવ
+          <div className="p-4">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-wide text-[var(--pn-purple)]">
+              Our shop&apos;s most famous item
+            </p>
+            <h2 className="mt-1.5 text-lg font-bold text-[var(--pn-red)] sm:text-xl">
+              ચીઝ મસાલા પકવાન
             </h2>
-            <p className="mt-2 text-zinc-600">
-              દરેક ક્ષણ સમાન સ્વાદ સાથે અમારી દાબેલીનો લ્હાવો લો.
+            <p className="mt-1 text-xs font-medium text-zinc-500">Cheese Masala Pakwan</p>
+            <p className="mt-2 text-sm text-zinc-600">
+              અમારી દુકાનની સૌથી લોકપ્રિય અને ફેમસ આઇટમ — ચીઝ મસાલા પકવાન. એ જ ખાસ સ્વાદ, ફ્રેશ
+              અને ગરમ.
             </p>
           </div>
         </article>

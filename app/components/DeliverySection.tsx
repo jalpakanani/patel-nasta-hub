@@ -49,7 +49,8 @@ export function DeliverySection() {
             </li>
           </ol>
           <p className="mt-6 rounded-2xl bg-[var(--pn-purple)]/5 p-4 text-sm text-zinc-600">
-            ₹300+ ઓર્ડર પર 2 કિ.મી. સુધી ફ્રી ડિલિવરી. બાકીના કિસ્સામાં કૉલ પર વિગત મળશે.
+            દુકાન {SHOP.openingHoursGu} ખુલ્લી રહે છે. ₹300+ ઓર્ડર પર 2 કિ.મી. સુધી ફ્રી ડિલિવરી.
+            બાકીના કિસ્સામાં કૉલ પર વિગત મળશે.
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { SHOP } from "@/lib/branding";
-import { HeroFlyerCard } from "./HeroFlyerCard";
+import Link from 'next/link'
+import {SHOP} from '@/lib/branding'
+import {HeroFlyerCard} from './HeroFlyerCard'
 
 export function HeroSection() {
   return (
@@ -21,8 +21,8 @@ export function HeroSection() {
         className="pointer-events-none absolute inset-0 opacity-[0.18]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)",
-          backgroundSize: "14px 14px",
+            'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)',
+          backgroundSize: '14px 14px',
         }}
       />
       <div className="relative mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 sm:items-center sm:gap-12 sm:px-6 sm:py-16">
@@ -35,9 +35,12 @@ export function HeroSection() {
               ફ્રી હોમ ડિલિવરી
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-white/90">
-              ઓફર, ફોન અને એડ્રેસ જમણી બાજુના પોસ્ટર પર — અહીંથી મેનુ જુઓ અથવા કૉલ કરો.
+              ઓફર, ફોન અને એડ્રેસ જમણી બાજુના પોસ્ટર પર — અહીંથી મેનુ જુઓ અથવા
+              કૉલ કરો.
             </p>
-            <p className="mt-2 text-sm text-[var(--pn-gold)]/90">* નિયમો લાગુ</p>
+            <p className="mt-2 text-sm text-[var(--pn-gold)]/90">
+              * નિયમો લાગુ
+            </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 href="#menu"
@@ -59,5 +62,5 @@ export function HeroSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

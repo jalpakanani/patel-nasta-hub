@@ -27,12 +27,12 @@ export function SiteFooter() {
                   {SHOP.phoneDisplay}
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a className="hover:underline" href={`mailto:${SHOP.email}`}>
                   {SHOP.email}
                 </a>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <a
                   className="hover:underline"
                   href={SHOP.website}
@@ -41,8 +41,13 @@ export function SiteFooter() {
                 >
                   www.patelnastahub.com
                 </a>
+              </li> */}
+              <li className="pt-1">
+                <span className="font-semibold text-white">દુકાન સમય</span>
+                <span className="mt-0.5 block text-zinc-400">{SHOP.openingHoursGu}</span>
+                <span className="mt-0.5 block text-xs text-zinc-500">{SHOP.openingHoursLatin}</span>
               </li>
-              <li className="pt-2 text-zinc-500">Instagram / YouTube / WhatsApp: {SHOP.socialHandle}</li>
+              <li className="pt-2 text-zinc-500">Instagram / WhatsApp: {SHOP.socialHandle}</li>
             </ul>
           </div>
         </div>

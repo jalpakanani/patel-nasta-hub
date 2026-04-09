@@ -80,6 +80,9 @@ export function HeroFlyerCard() {
             <p className="text-balance break-words text-center text-[10px] leading-snug text-white/80 sm:text-xs">
               {addressLine}
             </p>
+            <p className="text-center text-[10px] font-medium leading-snug text-[var(--pn-gold)]/95 sm:text-xs">
+              {SHOP.openingHoursGu}
+            </p>
           </div>
         </div>
       </div>

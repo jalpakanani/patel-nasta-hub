@@ -1,13 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
-import { SHOP } from "@/lib/branding";
+import Image from 'next/image'
+import Link from 'next/link'
+import {SHOP} from '@/lib/branding'
 
 const nav = [
-  { href: "#menu", label: "મેનુ" },
-  { href: "#delivery", label: "ડિલિવરી" },
-  { href: "#pay", label: "ચૂકવણી" },
-  { href: "#contact", label: "સંપર્ક" },
-];
+  {href: '#menu', label: 'મેનુ'},
+  {href: '#delivery', label: 'ડિલિવરી'},
+  {href: '#pay', label: 'ચૂકવણી'},
+  {href: '#contact', label: 'સંપર્ક'},
+]
 
 export function SiteHeader() {
   return (
@@ -34,8 +34,11 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="મુખ્ય નેવિગેશન">
-          {nav.map((item) => (
+        <nav
+          className="hidden items-center gap-1 md:flex"
+          aria-label="મુખ્ય નેવિગેશન"
+        >
+          {nav.map(item => (
             <a
               key={item.href}
               href={item.href}
@@ -68,7 +71,7 @@ export function SiteHeader() {
         className="flex gap-2 overflow-x-auto border-t border-[#4a1f13]/10 px-4 py-2.5 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] sm:px-6 md:hidden [&::-webkit-scrollbar]:hidden"
         aria-label="સેક્શન પર જાઓ"
       >
-        {nav.map((item) => (
+        {nav.map(item => (
           <a
             key={item.href}
             href={item.href}
@@ -79,5 +82,5 @@ export function SiteHeader() {
         ))}
       </nav>
     </header>
-  );
+  )
 }
