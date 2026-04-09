@@ -15,108 +15,129 @@ export type MenuCategory = {
 const u = (path: string) =>
   `https://images.unsplash.com${path}&auto=format&fit=crop&q=80`
 
+/** પ્રિન્ટ પોસ્ટર (લેમિનેટેડ મેનુ) સાથે સરખું — ક્રમ અને ભાવ */
 export const MENU_CATEGORIES: MenuCategory[] = [
   {
-    id: 'dabeli',
-    title: 'દાબેલી સ્પેશિયલ',
+    id: 'cheese-pakwan-dabeli',
+    title: 'ચીઝ, દાબેલી અને પકવાન',
     items: [
+      {
+        name: 'ચીઝ મસાલા પકવાન',
+        price: '₹80',
+        image: '/images/menu-masala-cheese-pakwan.png',
+      },
+      {
+        name: 'ચીઝ દાબેલી',
+        price: '₹50',
+        image: '/images/menu-chizz-dabeli.png',
+      },
       {
         name: 'દાબેલી',
         price: '₹30',
         image: '/images/dabeli-menu.png',
       },
       {
-        name: 'પટેલ સ્પેશીયલ દાબેલી',
-        price: '₹40',
-        image: '/images/kutchhi-dabeli.png',
-      },
-    ],
-  },
-  {
-    id: 'pakwan',
-    title: 'પકવાન અને બ્રેડ',
-    items: [
-      {
         name: 'દાળપકવાન',
         price: '₹30',
-        image: u('/photo-1585937421612-70a008356fbe?w=600&h=450'),
+        image: '/images/menu-dal-pakwan.png',
       },
       {
         name: 'મસાલા પકવાન',
         price: '₹40',
-        image: u('/photo-1565557623262-b51c2513a641?w=600&h=450'),
+        image: '/images/menu-masala-pakwan.png',
       },
       {
         name: 'બ્રેડ કટકા',
         price: '₹40',
-        image: '/images/bread-katka.jpg',
+        image: '/images/bread-katka-v2.jpg',
       },
     ],
   },
   {
-    id: 'snacks',
+    id: 'bhel-snacks',
     title: 'ભેળ, ભજીયા અને વધુ',
     items: [
       {
         name: 'ભેળ',
         price: '₹40',
-        image: u('/photo-1589302168068-964664d93dc0?w=600&h=450'),
+        image: '/images/menu-bhel.png',
       },
       {
         name: 'ભજીયા',
         price: '₹50',
-        image: u('/photo-1606491956689-2ea866880c84?w=600&h=450'),
+        image: '/images/menu-bhajiya.png',
       },
       {
-        name: 'ગાંઠીયા',
+        name: 'ગાઠીયા',
         price: '₹50',
-        image: u('/photo-1601050690597-df0568f70950?w=600&h=450'),
+        image: '/images/menu-gathiya.png',
       },
       {
         name: 'ગોગળી કુંભણિયા',
         price: '₹50',
-        image: u('/photo-1540189549336-e6e99c3679fe?w=600&h=450'),
+        image: '/images/menu-kumbhaniya.png',
       },
       {
         name: 'ચિપ્સ (ફ્રેંચ ફ્રાઈ)',
         price: '₹50',
-        image: u('/photo-1573080496219-bb080dd4f877?w=600&h=450'),
+        image: '/images/menu-french-fries.png',
       },
       {
         name: 'દહીં ભેળ',
         price: '₹50',
-        image: '/images/dahi-bhel.jpg',
+        image: '/images/menu-dahi-bhel.png',
       },
       {
         name: 'દહીં કચોરી',
         price: '₹50',
-        image: '/images/dahi-kachori.png',
-      },
-      {
-        name: 'તીખા મોરા',
-        price: '₹40',
-        image: u('/photo-1596797038530-2c107229654b?w=600&h=450'),
-      },
-      {
-        name: 'દહીં તીખા મોરા',
-        price: '₹50',
-        image: '/images/dahi-bhel.jpg',
+        image: '/images/menu-dahi-kachori.png',
       },
     ],
   },
   {
-    id: 'farali',
-    title: 'ફરાળી',
+    id: 'farali-mora',
+    title: 'ફરાળી, મોરા અને સ્પેશિયલ',
     items: [
+      {
+        name: 'ફરાળી ભેળ (દહીં)',
+        price: '₹50',
+        image: '/images/farali-bhel-dahi.png',
+      },
       {
         name: 'ફરાળી ભેળ',
         price: '₹40',
         image: '/images/farali-bhel-official.png',
       },
       {
-        name: 'ફરાળી ભેળ (દહીં)',
+        name: 'તીખા મોરા',
+        price: '₹40',
+        image: '/images/menu-tikha-mora-v2.jpg',
+      },
+      {
+        name: "દહીં તીખા મોરા",
+        price: "₹50",
+        image: "/images/menu-dahi-tikha-mora.png",
+      },
+      {
+        name: 'પટેલ સ્પેશીયલ દાબેલી',
+        price: '₹40',
+        image: '/images/dabeli-menu.png',
+      },
+    ],
+  },
+  {
+    id: 'maggi',
+    title: 'મેગી',
+    items: [
+      {
+        name: 'મેગી',
         price: '₹50',
-        image: '/images/farali-bhel-dahi.jpg',
+        image: '/images/menu-maggi.png',
+      },
+      {
+        name: 'ચીઝ મસાલા મેગી',
+        price: '₹80',
+        image: '/images/menu-cheese-masala-maggi.png',
       },
     ],
   },
@@ -124,17 +145,11 @@ export const MENU_CATEGORIES: MenuCategory[] = [
     id: 'drinks',
     title: 'પીણાં',
     items: [
-      {name: 'છાશ', price: '₹10', image: '/images/chhaas.png'},
+      { name: "છાશ", price: "₹10", image: "/images/menu-chhaas.png" },
       {
         name: 'કોલ્ડ્રીંક્સ',
         price: '₹10',
         image: u('/photo-1622483767028-3f66f32aef97?w=600&h=450'),
-      },
-      {
-        name: 'પાણી',
-        price: '₹10 / ₹20',
-        image: '/images/water-bottle.jpg',
-        note: 'બોટલ પ્રમાણે ભાવ',
       },
     ],
   },
@@ -144,3 +159,7 @@ export const MENU_NOTES = [
   'જે વસ્તુ હાજર હશે તેજ મળશે.',
   'એક્સ્ટ્રા વસ્તુ નાખવાનો અલગથી ચાર્જ રહેશે.',
 ] as const
+
+/** લેમિનેટેડ મેનુની ઓરિજિનલ PNG — `public/images/menu-poster-original.png` બદલતા નામ/pાથ અપડેટ કરો */
+export const PRINTED_MENU_SRC = '/images/menu-poster-original.png' as const
+export const PRINTED_MENU_ALT = 'પટેલ નાસ્તા હબ — પ્રિન્ટ મેનુ' as const

@@ -1,6 +1,8 @@
 export const SHOP = {
   name: "પટેલ નાસ્તા હબ",
   nameLatin: "Patel Nasta Hub",
+  /** સફેદ ટાઇપ — લાઇટ બૅકગ્રાઉન્ડ પર ડાર્ક કન્ટેનરમાં દેખાડવું */
+  logoSrc: "/images/logo-brand.png",
   tagline: "સ્વાદ જે દિલ સુધી પહોંચે",
   phoneDisplay: "+91 96648 59253",
   phoneTel: "+919664859253",

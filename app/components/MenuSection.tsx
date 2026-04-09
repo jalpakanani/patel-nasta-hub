@@ -1,5 +1,10 @@
 import Image from "next/image";
-import { MENU_CATEGORIES, MENU_NOTES } from "@/lib/menu";
+import {
+  MENU_CATEGORIES,
+  MENU_NOTES,
+  PRINTED_MENU_ALT,
+  PRINTED_MENU_SRC,
+} from "@/lib/menu";
 
 export function MenuSection() {
   return (
@@ -7,13 +12,13 @@ export function MenuSection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 text-center">
           <span className="inline-block rounded-full bg-[var(--pn-purple)]/10 px-4 py-1 text-sm font-bold text-[var(--pn-purple)]">
-            મેનુ અને ભાવ
+            મેનુ અને કિંમતો
           </span>
           <h2 className="mt-4 text-3xl font-extrabold text-[var(--pn-purple-deep)] sm:text-4xl">
-            તાજું નાસ્તું, સાચા ભાવ
+            તાજા નાસ્તા, વાજબી ભાવ
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-zinc-600">
-            ઓર્ડર પહેલાં મેનુ જુઓ — ફોન પર કહેશો તો પણ અમે ઝડપથી તૈયાર કરીશું.
+            મેનુ જોવો, ફોન પર ઓર્ડર આપો ને ફ્રેશ નાસ્તાનો આનંદ માણો.
           </p>
         </div>
 
@@ -39,8 +44,8 @@ export function MenuSection() {
                         sizes="(max-width: 640px) 112px, 128px"
                       />
                     </div>
-                    <div className="flex min-w-0 flex-1 flex-col justify-center p-4">
-                      <p className="font-bold leading-snug text-zinc-900">{item.name}</p>
+                    <div className="flex min-w-0 flex-1 flex-col justify-center p-3 sm:p-4">
+                      <p className="break-words font-bold leading-snug text-zinc-900">{item.name}</p>
                       {item.note ? (
                         <p className="mt-1 text-xs text-zinc-500">{item.note}</p>
                       ) : null}
@@ -64,18 +69,21 @@ export function MenuSection() {
         </div>
 
         <div className="mt-14">
-          <h3 className="mb-4 text-center text-lg font-bold text-[var(--pn-purple-deep)]">
+          <h3 className="mb-6 text-center text-lg font-bold text-[var(--pn-purple-deep)] sm:text-xl">
             અમારું પ્રિન્ટ મેનુ
           </h3>
-          <div className="relative mx-auto max-w-2xl overflow-hidden rounded-2xl border border-zinc-200 bg-black shadow-xl">
-            <Image
-              src="/images/menu-poster.png"
-              alt="પટેલ નાસ્તા હબ મેનુ પોસ્ટર"
-              width={1200}
-              height={1600}
-              className="h-auto w-full object-contain"
-              sizes="(max-width: 768px) 100vw, 672px"
-            />
+          <div className="mx-auto max-w-md sm:max-w-lg md:max-w-xl">
+            <div className="overflow-hidden rounded-lg shadow-2xl ring-1 ring-black/10">
+              <Image
+                src={PRINTED_MENU_SRC}
+                alt={PRINTED_MENU_ALT}
+                width={1200}
+                height={1800}
+                className="h-auto w-full object-contain object-top"
+                sizes="(max-width: 768px) 100vw, 672px"
+                unoptimized
+              />
+            </div>
           </div>
         </div>
       </div>

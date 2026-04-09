@@ -5,8 +5,13 @@
   --background: #faf6f0;
   --foreground: #1c1917;
   --pn-cream: #faf6f0;
-  --pn-purple: #5b2d82;
-  --pn-purple-deep: #3b1758;
+  /** પ્રાઇમરી બ્રાન્ડ (હીરો, બટન, લિંક્સ) — નામ ઇતિહાસિક છે, રંગ ગરમ એમ્બર */
+  --pn-purple: #b45309;
+  --pn-purple-deep: #78350f;
+  /** પેમેન્ટ સેક્શન ગ્રેડિયન્ટ નીચે */
+  --pn-gradient-end: #422006;
+  /** હીરો ફ્લાયર જમણો પેનલ — મુખ્ય બેન્ડ કરતાં ઘેરો, અલગ લેયર */
+  --pn-flyer-panel: #3d1b07;
   --pn-gold: #d4a84b;
   --pn-orange: #ea580c;
   --pn-red: #b91c1c;
