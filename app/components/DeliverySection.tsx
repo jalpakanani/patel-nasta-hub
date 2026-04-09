@@ -8,12 +8,13 @@ export function DeliverySection() {
       className="scroll-mt-24 border-t border-zinc-200 bg-white py-14 sm:py-20"
     >
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:grid-cols-2 sm:px-6">
-        <div className="relative aspect-square max-w-md overflow-hidden rounded-3xl border border-zinc-100 shadow-lg sm:mx-0">
+        <div className="relative mx-auto flex aspect-[5/4] max-w-md items-center justify-center overflow-hidden rounded-3xl border border-[#c9a227]/35 bg-zinc-950 p-8 shadow-xl shadow-black/20 ring-1 ring-[#c9a227]/20 sm:mx-0">
           <Image
-            src="/images/logo-chef.png"
-            alt="પટેલ નાસ્તા હબ લોગો"
-            fill
-            className="object-contain bg-[#f4f4f5] p-6"
+            src={SHOP.logoSrc}
+            alt={SHOP.nameLatin}
+            width={480}
+            height={200}
+            className="h-auto w-full max-w-sm object-contain"
             sizes="(max-width: 768px) 100vw, 400px"
           />
         </div>

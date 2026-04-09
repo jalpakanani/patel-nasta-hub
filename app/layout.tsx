@@ -10,12 +10,17 @@ const mukta = Mukta_Vaani({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SHOP.website),
   title: `${SHOP.name} | ${SHOP.nameLatin}`,
   description: `${SHOP.tagline} — મેનુ, ભાવ, હોમ ડિલિવરી અને UPI ચૂકવણી.`,
+  icons: {
+    apple: SHOP.logoSrc,
+  },
   openGraph: {
     title: `${SHOP.name} | ${SHOP.nameLatin}`,
     description: SHOP.tagline,
     locale: "gu_IN",
+    images: [{ url: SHOP.logoSrc, alt: SHOP.nameLatin }],
   },
 };
 

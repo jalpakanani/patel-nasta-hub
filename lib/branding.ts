@@ -1,6 +1,8 @@
 export const SHOP = {
   name: "પટેલ નાસ્તા હબ",
   nameLatin: "Patel Nasta Hub",
+  /** પ્રાઇમરી બ્રાન્ડ લોગો (ગોલ્ડ / વ્હાઇટ ઓન ડાર્ક) */
+  logoSrc: "/images/logo-main.png",
   tagline: "સ્વાદ જે દિલ સુધી પહોંચે",
   phoneDisplay: "+91 96648 59253",
   phoneTel: "+919664859253",

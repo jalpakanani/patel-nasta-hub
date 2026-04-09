@@ -13,24 +13,20 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#4a1f13]/10 bg-[var(--pn-cream)]/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="flex min-w-0 items-center gap-3">
-          <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-[var(--pn-gold)] bg-white shadow-sm sm:h-14 sm:w-14">
+        <Link href="/" className="flex min-w-0 items-center gap-3 sm:gap-4">
+          <span className="flex shrink-0 items-center rounded-2xl bg-zinc-950 px-2.5 py-1.5 shadow-md ring-1 ring-[#c9a227]/40 sm:px-3 sm:py-2">
             <Image
-              src="/images/logo-seal.png"
+              src={SHOP.logoSrc}
               alt={SHOP.nameLatin}
-              fill
-              className="object-cover"
-              sizes="56px"
+              width={220}
+              height={72}
+              className="h-9 w-auto max-w-[min(52vw,220px)] object-contain object-left sm:h-11"
               priority
             />
           </span>
-          <span className="min-w-0 text-left leading-tight">
-            <span className="block font-extrabold text-[var(--pn-red)] sm:text-lg">
-              {SHOP.name}
-            </span>
-            <span className="hidden text-xs text-zinc-600 sm:block">
-              {SHOP.tagline}
-            </span>
+          <span className="hidden min-w-0 text-left leading-tight sm:block">
+            <span className="block text-sm font-bold text-zinc-800">{SHOP.name}</span>
+            <span className="text-xs text-zinc-500">{SHOP.tagline}</span>
           </span>
         </Link>
 
