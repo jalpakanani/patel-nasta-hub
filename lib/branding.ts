@@ -1,0 +1,18 @@
+export const SHOP = {
+  name: "પટેલ નાસ્તા હબ",
+  nameLatin: "Patel Nasta Hub",
+  tagline: "સ્વાદ જે દિલ સુધી પહોંચે",
+  phoneDisplay: "+91 96648 59253",
+  phoneTel: "+919664859253",
+  whatsapp: "https://wa.me/919664859253",
+  email: "Patelnastqhub@gmail.com",
+  website: "https://www.patelnastahub.com",
+  addressLines: [
+    "છાપરા જી.આઈ.ડી.સી., કાલાવડ રોડ, છાપરા",
+    "દેવડા નું પાટિયું, જેસડિયા કોમ્પ્લેક્સ",
+  ],
+  addressShort: "છાપરા જી.આઈ.ડી.સી., કાલાવડ રોડ, છાપરા",
+  socialHandle: "patel nasta hub",
+  ownerGu: "સોજીત્રા મધુરેશ વલ્લભભાઈ",
+  upiId: "paytmqr67fjfd@ptys",
+} as const;
