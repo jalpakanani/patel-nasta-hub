@@ -1,18 +1,6 @@
 import Image from "next/image";
 import { MENU_CATEGORIES, MENU_NOTES } from "@/lib/menu";
 
-const menuThumbPriority = (() => {
-  const m = new Map<string, boolean>();
-  let i = 0;
-  for (const cat of MENU_CATEGORIES) {
-    for (const item of cat.items) {
-      m.set(`${cat.id}::${item.name}`, i < 6);
-      i += 1;
-    }
-  }
-  return m;
-})();
-
 export function MenuSection() {
   return (
     <section id="menu" className="scroll-mt-24 bg-[var(--pn-cream)] py-14 sm:py-20">
@@ -49,12 +37,6 @@ export function MenuSection() {
                         fill
                         className="object-cover"
                         sizes="(max-width: 640px) 112px, 128px"
-                        priority={menuThumbPriority.get(`${cat.id}::${item.name}`) === true}
-                        fetchPriority={
-                          menuThumbPriority.get(`${cat.id}::${item.name}`)
-                            ? "high"
-                            : "low"
-                        }
                       />
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col justify-center p-4">

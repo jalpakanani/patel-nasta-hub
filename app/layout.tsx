@@ -10,17 +10,12 @@ const mukta = Mukta_Vaani({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SHOP.website),
   title: `${SHOP.name} | ${SHOP.nameLatin}`,
   description: `${SHOP.tagline} — મેનુ, ભાવ, હોમ ડિલિવરી અને UPI ચૂકવણી.`,
-  icons: {
-    apple: SHOP.logoSrc,
-  },
   openGraph: {
     title: `${SHOP.name} | ${SHOP.nameLatin}`,
     description: SHOP.tagline,
     locale: "gu_IN",
-    images: [{ url: SHOP.logoSrc, alt: SHOP.nameLatin }],
   },
 };
 
@@ -30,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="gu" className={`${mukta.variable} h-full`}>
+    <html lang="gu" className={`${mukta.variable} h-full`} style={{ colorScheme: "light" }}>
       <body className="min-h-full bg-[var(--pn-cream)] pb-20 font-sans text-zinc-900 antialiased md:pb-0">
         {children}
       </body>
