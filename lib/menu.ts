@@ -99,14 +99,14 @@ export const MENU_CATEGORIES: MenuCategory[] = [
     title: 'ફરાળી, મોરા અને સ્પેશિયલ',
     items: [
       {
-        name: 'ફરાળી ભેળ (દહીં)',
-        price: '₹50',
-        image: '/images/farali-bhel-dahi.png',
-      },
-      {
         name: 'ફરાળી ભેળ',
         price: '₹40',
         image: '/images/farali-bhel-official.png',
+      },
+      {
+        name: 'ફરાળી ભેળ (દહીં)',
+        price: '₹50',
+        image: '/images/farali-bhel-dahi.png',
       },
       {
         name: 'તીખા મોરા',
@@ -114,12 +114,12 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         image: '/images/menu-tikha-mora-v2.jpg',
       },
       {
-        name: "દહીં તીખા મોરા",
-        price: "₹50",
-        image: "/images/menu-dahi-tikha-mora.png",
+        name: 'દહીં તીખા મોરા',
+        price: '₹50',
+        image: '/images/menu-dahi-tikha-mora.png',
       },
       {
-        name: 'પટેલ સ્પેશીયલ દાબેલી',
+        name: 'પટેલ સ્પેશિયલ દાબેલી',
         price: '₹40',
         image: '/images/dabeli-menu.png',
       },

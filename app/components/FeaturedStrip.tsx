@@ -23,8 +23,8 @@ export function FeaturedStrip() {
             </h2>
             <p className="mt-1 text-xs font-medium text-zinc-500">Cheese Masala Pakwan</p>
             <p className="mt-2 text-sm text-zinc-600">
-              અમારી દુકાનની સૌથી લોકપ્રિય અને ફેમસ આઇટમ — ચીઝ મસાલા પકવાન. એ જ ખાસ સ્વાદ, ફ્રેશ
-              અને ગરમ.
+              અમારી દુકાનની સૌથી લોકપ્રિય અને ફેમસ આઇટમ — ચીઝ મસાલા પકવાન. ખાસ મસાલા અને ચીઝથી ભરપૂર,
+              દરેક વાર એક જ લાજવાબ સ્વાદ.
             </p>
           </div>
         </article>

@@ -16,7 +16,6 @@ export const SHOP = {
   socialHandle: 'patel nasta hub',
   ownerGu: 'સોજીત્રા મધુરેશ વલ્લભભાઈ',
   upiId: 'paytmqr67fjfd@ptys',
-  /** દૈનિક દુકાન સમય */
-  openingHoursGu: 'સવારે 7 વાગ્યાથી રાત્રે 11 વાગ્યા સુધી',
-  openingHoursLatin: '7:00 AM – 11:00 PM',
+  openingHoursGu: 'સવારે 7 વાગ્યાથી રાત્રે 10 વાગ્યા સુધી',
+  openingHoursLatin: '7:00 AM – 10:00 PM',
 } as const
