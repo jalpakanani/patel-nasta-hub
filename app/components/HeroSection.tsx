@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import {SHOP} from '@/lib/branding'
+import { SHOP } from '@/lib/branding'
 import {HeroFlyerCard} from './HeroFlyerCard'
 
 export function HeroSection() {

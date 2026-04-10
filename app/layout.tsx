@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Mukta_Vaani } from "next/font/google";
 import "./globals.css";
 import { SHOP } from "@/lib/branding";
+import { localBusinessJsonLd } from "@/lib/localBusinessJsonLd";
 
 const mukta = Mukta_Vaani({
   subsets: ["gujarati", "latin", "latin-ext"],
@@ -16,7 +17,6 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SHOP.website),
   title: `${SHOP.name} | ${SHOP.nameLatin}`,
   description: `${SHOP.tagline} — મેનુ, ભાવ, હોમ ડિલિવરી અને UPI ચૂકવણી.`,
   /** Favicon: `app/favicon.ico` (ICO) + `app/icon.png` / `apple-icon.png` */
@@ -40,6 +40,12 @@ export default function RootLayout({
         className="min-h-full bg-[var(--pn-cream)] pb-20 font-sans text-zinc-900 antialiased md:pb-0"
         suppressHydrationWarning
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessJsonLd()),
+          }}
+        />
         {children}
       </body>
     </html>

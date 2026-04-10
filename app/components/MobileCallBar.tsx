@@ -1,4 +1,4 @@
-import { SHOP } from "@/lib/branding";
+import { SHOP, shopWhatsAppHref } from "@/lib/branding";
 
 export function MobileCallBar() {
   return (
@@ -11,7 +11,7 @@ export function MobileCallBar() {
           ઓર્ડર: કૉલ કરો
         </a>
         <a
-          href={SHOP.whatsapp}
+          href={shopWhatsAppHref()}
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-1 items-center justify-center rounded-2xl border-2 border-[#25D366] bg-[#25D366]/10 py-3.5 text-center text-sm font-bold text-[#128C7E]"

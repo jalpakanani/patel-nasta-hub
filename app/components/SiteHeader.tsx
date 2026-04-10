@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import {SHOP} from '@/lib/branding'
+import { SHOP, shopWhatsAppHref } from '@/lib/branding'
 
 const nav = [
   {href: '#menu', label: 'મેનુ'},
@@ -51,7 +51,7 @@ export function SiteHeader() {
 
         <div className="flex shrink-0 items-center gap-2">
           <a
-            href={SHOP.whatsapp}
+            href={shopWhatsAppHref()}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden rounded-full border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-2 text-sm font-semibold text-[#128C7E] sm:inline-flex"

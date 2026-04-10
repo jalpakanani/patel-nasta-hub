@@ -18,10 +18,11 @@ export function MenuSection() {
             મેનુ અને કિંમતો
           </span>
           <h2 className="mt-4 text-3xl font-extrabold text-[var(--pn-purple-deep)] sm:text-4xl">
-            તાજા નાસ્તા, વાજબી ભાવ
+            તાજો નાસ્તો, વ્યાજબી ભાવ
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-zinc-600">
-            મેનુ જોવો, ફોન પર ઓર્ડર આપો ને ફ્રેશ નાસ્તાનો આનંદ માણો.
+            મેનુમાંથી વસ્તુ પસંદ કરો, ફોન કે WhatsAppથી ઓર્ડર આપો ને ફ્રેશ
+            નાસ્તાનો આનંદ માણો.
           </p>
         </div>
 
@@ -48,9 +49,28 @@ export function MenuSection() {
                       />
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col justify-center p-3 sm:p-4">
-                      <p className="break-words font-bold leading-snug text-zinc-900">
-                        {item.name}
-                      </p>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <p className="break-words font-bold leading-snug text-zinc-900">
+                          {item.name}
+                        </p>
+                        {item.featured ? (
+                          <span className="shrink-0 rounded-full bg-[var(--pn-gold)]/25 px-2 py-0.5 text-[0.6rem] font-extrabold uppercase tracking-wide text-[var(--pn-purple-deep)] ring-1 ring-[var(--pn-gold)]/40">
+                            ફેમસ પિક
+                          </span>
+                        ) : null}
+                      </div>
+                      {item.tags?.length ? (
+                        <div className="mt-1.5 flex flex-wrap gap-1">
+                          {item.tags.map(tag => (
+                            <span
+                              key={`${item.name}-${tag}`}
+                              className="inline-block rounded-full bg-[var(--pn-orange)]/15 px-2 py-0.5 text-[0.65rem] font-bold text-[var(--pn-red)]"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
                       {item.note ? (
                         <p className="mt-1 text-xs text-zinc-500">
                           {item.note}

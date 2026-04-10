@@ -1,4 +1,4 @@
-import { SHOP } from "@/lib/branding";
+import { SHOP, shopWhatsAppHref } from "@/lib/branding";
 
 export function SiteFooter() {
   return (
@@ -18,6 +18,16 @@ export function SiteFooter() {
                 </span>
               ))}
             </address>
+            <p className="mt-3">
+              <a
+                className="text-sm font-semibold text-[var(--pn-gold)] underline-offset-2 hover:underline"
+                href={SHOP.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google Maps પર લોકેશન
+              </a>
+            </p>
           </div>
           <div>
             <h3 className="text-lg font-bold text-[var(--pn-gold)]">સંપર્ક</h3>
@@ -27,27 +37,38 @@ export function SiteFooter() {
                   {SHOP.phoneDisplay}
                 </a>
               </li>
-              {/* <li>
-                <a className="hover:underline" href={`mailto:${SHOP.email}`}>
-                  {SHOP.email}
-                </a>
-              </li> */}
-              {/* <li>
+              <li>
                 <a
-                  className="hover:underline"
-                  href={SHOP.website}
+                  className="font-semibold text-[#25D366] hover:underline"
+                  href={shopWhatsAppHref()}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  www.patelnastahub.com
+                  WhatsApp ઓર્ડર
                 </a>
-              </li> */}
+              </li>
+             
+             
               <li className="pt-1">
                 <span className="font-semibold text-white">દુકાન સમય</span>
                 <span className="mt-0.5 block text-zinc-400">{SHOP.openingHoursGu}</span>
                 <span className="mt-0.5 block text-xs text-zinc-500">{SHOP.openingHoursLatin}</span>
               </li>
-              <li className="pt-2 text-zinc-500">Instagram / WhatsApp: {SHOP.socialHandle}</li>
+              <li className="pt-2 space-y-1.5 text-zinc-500">
+                <p>
+                  <span className="text-zinc-400">Instagram:</span>{" "}
+                  <a
+                    className="text-[var(--pn-gold)] hover:underline"
+                    href={SHOP.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {SHOP.socialHandleLatin}
+                  </a>{" "}
+                  <span className="text-zinc-600">({SHOP.socialHandle})</span>
+                </p>
+               
+              </li>
             </ul>
           </div>
         </div>

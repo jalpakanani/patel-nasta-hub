@@ -4,6 +4,14 @@ export type MenuItem = {
   /** Local `/images/...` or remote URL for Next/Image */
   image: string
   note?: string
+  /** Small badges on menu cards */
+  tags?: readonly string[]
+  /** First matching item drives the home featured strip */
+  featured?: boolean
+  /** Hero image for featured strip; defaults to `image` */
+  featureImage?: string
+  featureDescriptionGu?: string
+  nameLatin?: string
 }
 
 export type MenuCategory = {
@@ -11,9 +19,6 @@ export type MenuCategory = {
   title: string
   items: MenuItem[]
 }
-
-const u = (path: string) =>
-  `https://images.unsplash.com${path}&auto=format&fit=crop&q=80`
 
 /** પ્રિન્ટ પોસ્ટર (લેમિનેટેડ મેનુ) સાથે સરખું — ક્રમ અને ભાવ */
 export const MENU_CATEGORIES: MenuCategory[] = [
@@ -25,6 +30,12 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         name: 'ચીઝ મસાલા પકવાન',
         price: '₹80',
         image: '/images/menu-masala-cheese-pakwan.png',
+        featured: true,
+        featureImage: '/images/featured-cheese-masala-pakwan.jpg',
+        nameLatin: 'Cheese Masala Pakwan',
+        featureDescriptionGu:
+          'અમારી દુકાનની સૌથી લોકપ્રિય અને ફેમસ આઇટમ — ચીઝ મસાલા પકવાન. ખાસ મસાલા અને ચીઝથી ભરપૂર, દરેક વાર એક જ લાજવાબ સ્વાદ.',
+        tags: ['લોકપ્રિય', 'ફેમસ'],
       },
       {
         name: 'ચીઝ દાબેલી',
@@ -35,6 +46,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         name: 'દાબેલી',
         price: '₹30',
         image: '/images/dabeli-menu.png',
+        tags: ['ક્લાસિક'],
       },
       {
         name: 'દાળપકવાન',
@@ -96,7 +108,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
   },
   {
     id: 'farali-mora',
-    title: 'ફરાળી, મોરા અને સ્પેશિયલ',
+    title: 'ફરાળી, તીખા મોરા અને સ્પેશિયલ',
     items: [
       {
         name: 'ફરાળી ભેળ',
@@ -112,6 +124,7 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         name: 'તીખા મોરા',
         price: '₹40',
         image: '/images/menu-tikha-mora-v2.jpg',
+        // tags: ['તીખું'],
       },
       {
         name: 'દહીં તીખા મોરા',
@@ -143,17 +156,50 @@ export const MENU_CATEGORIES: MenuCategory[] = [
   },
   {
     id: 'drinks',
-    title: 'પીણાં',
+    title: 'પીણા',
     items: [
-      { name: "છાશ", price: "₹10", image: "/images/menu-chhaas.png" },
+      {name: 'છાશ', price: '₹10', image: '/images/menu-chhaas.png'},
+      {
+        name: 'લસ્સી',
+        price: '₹20',
+        image: '/images/menu-lassi.png',
+        note: 'મીઠી લસ્સી',
+      },
       {
         name: 'કોલ્ડ્રીંક્સ',
         price: '₹10',
-        image: u('/photo-1622483767028-3f66f32aef97?w=600&h=450'),
+        image: '/images/menu-cold-drinks.png',
+        // note: 'લિમ્કા, માઉન્ટેન ડ્યૂ, કોક, ફેન્ટા, થંબ્સ અપ — જે હોય તે',
       },
     ],
   },
 ]
+
+export function getFeaturedSpotlight(): {
+  name: string
+  price: string
+  image: string
+  nameLatin?: string
+  descriptionGu: string
+} | null {
+  for (const cat of MENU_CATEGORIES) {
+    for (const item of cat.items) {
+      if (item.featured) {
+        return {
+          name: item.name,
+          price: item.price,
+          image: item.featureImage ?? item.image,
+          nameLatin: item.nameLatin,
+          descriptionGu:
+            item.featureDescriptionGu ??
+            item.note ??
+            'અમારી દુકાનની ખાસ ભલામણ.',
+        }
+      }
+    }
+  }
+  return null
+}
 
 export const MENU_NOTES = [
   'જે વસ્તુ હાજર હશે તેજ મળશે.',

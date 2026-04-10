@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SHOP } from "@/lib/branding";
+import { SHOP, shopWhatsAppHref } from "@/lib/branding";
 
 export function DeliverySection() {
   return (
@@ -31,6 +31,15 @@ export function DeliverySection() {
                 મેનુમાંથી વસ્તુઓ પસંદ કરો અને{" "}
                 <a className="font-bold text-[var(--pn-purple)] underline" href={`tel:${SHOP.phoneTel}`}>
                   કૉલ
+                </a>{" "}
+                કરો અથવા{" "}
+                <a
+                  className="font-bold text-[#128C7E] underline"
+                  href={shopWhatsAppHref()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WhatsApp
                 </a>{" "}
                 કરો.
               </span>
