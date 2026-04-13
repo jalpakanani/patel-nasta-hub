@@ -1,7 +1,7 @@
 const WHATSAPP_DIGITS = '919664859253' as const
 
 const WHATSAPP_ORDER_MESSAGE_GU =
-  'નમસ્તે પટેલ નાસ્તા હબ, મારે ઓર્ડર વિશે વાત કરવી છે. કૃપા કરીને મેનુ અને ભાવ મોકલશો? ધન્યવાદ 🙏' as const
+  'નમસ્તે પટેલ નાસ્તા હબ, અમે નાસ્તો ઓર્ડર કરવા માંગીએ છીએ.' as const
 
 export const SHOP = {
   name: 'પટેલ નાસ્તા હબ',
@@ -34,10 +34,9 @@ export const SHOP = {
   featuredEyebrowLatin: 'Our shop’s most famous item',
 } as const
 
-/** WhatsApp chat; default pre-fills a Gujarati order message */
-export function shopWhatsAppHref(options?: {prefillOrder?: boolean}) {
-  const prefill = options?.prefillOrder !== false
+/** WhatsApp — default pre-fills short order message; `prefillOrder: false` for empty chat */
+export function shopWhatsAppHref(options?: { prefillOrder?: boolean }) {
   const base = `https://wa.me/${SHOP.whatsappPhoneDigits}`
-  if (!prefill) return base
+  if (options?.prefillOrder === false) return base
   return `${base}?text=${encodeURIComponent(SHOP.whatsappOrderMessageGu)}`
 }
