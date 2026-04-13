@@ -35,8 +35,11 @@ export function HeroSection() {
               ફ્રી હોમ ડિલિવરી
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-white/90">
-              ઓફર, ફોન અને એડ્રેસ જમણી બાજુના પોસ્ટર પર — અહીંથી મેનુ જુઓ અથવા
-              કૉલ કરો.
+              ઓફર, ફોન અને એડ્રેસ{' '}
+              <span className="sm:hidden">ઉપરના પોસ્ટર પર</span>
+              <span className="hidden sm:inline">જમણી બાજુના પોસ્ટર પર</span>
+              {' '}
+              — અહીંથી મેનુ જુઓ અથવા કૉલ કરો.
             </p>
             <p className="mt-2 text-sm text-[var(--pn-gold)]/90">
               * નિયમો લાગુ

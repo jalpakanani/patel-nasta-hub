@@ -1,4 +1,5 @@
 import { SHOP, shopWhatsAppHref } from "@/lib/branding";
+import { IconInstagram, IconMapPin, IconWhatsApp } from "@/app/components/BrandIcons";
 
 export function SiteFooter() {
   return (
@@ -20,11 +21,12 @@ export function SiteFooter() {
             </address>
             <p className="mt-3">
               <a
-                className="text-sm font-semibold text-[var(--pn-gold)] underline-offset-2 hover:underline"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--pn-gold)] underline-offset-2 hover:underline"
                 href={SHOP.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <IconMapPin className="h-4 w-4 shrink-0" />
                 Google Maps પર લોકેશન
               </a>
             </p>
@@ -39,11 +41,12 @@ export function SiteFooter() {
               </li>
               <li>
                 <a
-                  className="font-semibold text-[#25D366] hover:underline"
+                  className="inline-flex items-center gap-2 font-semibold text-[#25D366] hover:underline"
                   href={shopWhatsAppHref()}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <IconWhatsApp className="h-4 w-4 shrink-0" />
                   WhatsApp ઓર્ડર
                 </a>
               </li>
@@ -55,8 +58,9 @@ export function SiteFooter() {
                 <span className="mt-0.5 block text-xs text-zinc-500">{SHOP.openingHoursLatin}</span>
               </li>
               <li className="pt-2 space-y-1.5 text-zinc-500">
-                <p>
-                  <span className="text-zinc-400">Instagram:</span>{" "}
+                <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <IconInstagram className="h-4 w-4 shrink-0" />
+                  <span className="text-zinc-400">Instagram</span>
                   <a
                     className="text-[var(--pn-gold)] hover:underline"
                     href={SHOP.instagramUrl}
@@ -64,10 +68,9 @@ export function SiteFooter() {
                     rel="noopener noreferrer"
                   >
                     {SHOP.socialHandleLatin}
-                  </a>{" "}
+                  </a>
                   <span className="text-zinc-600">({SHOP.socialHandle})</span>
                 </p>
-               
               </li>
             </ul>
           </div>

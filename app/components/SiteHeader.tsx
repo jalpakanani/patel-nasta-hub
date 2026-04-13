@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { SHOP, shopWhatsAppHref } from '@/lib/branding'
+import { IconWhatsApp } from '@/app/components/BrandIcons'
 
 const nav = [
   {href: '#menu', label: 'મેનુ'},
@@ -54,8 +55,9 @@ export function SiteHeader() {
             href={shopWhatsAppHref()}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-full border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-2 text-sm font-semibold text-[#128C7E] sm:inline-flex"
+            className="hidden items-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-2 text-sm font-semibold text-[#25D366] sm:inline-flex"
           >
+            <IconWhatsApp className="h-4 w-4" />
             WhatsApp
           </a>
           <a

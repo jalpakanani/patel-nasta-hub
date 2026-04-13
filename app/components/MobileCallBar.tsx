@@ -1,4 +1,5 @@
 import { SHOP, shopWhatsAppHref } from "@/lib/branding";
+import { IconWhatsApp } from "@/app/components/BrandIcons";
 
 export function MobileCallBar() {
   return (
@@ -14,8 +15,9 @@ export function MobileCallBar() {
           href={shopWhatsAppHref()}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-1 items-center justify-center rounded-2xl border-2 border-[#25D366] bg-[#25D366]/10 py-3.5 text-center text-sm font-bold text-[#128C7E]"
+          className="flex flex-1 items-center justify-center gap-2 rounded-2xl border-2 border-[#25D366] bg-[#25D366]/10 py-3.5 text-center text-sm font-bold text-[#25D366]"
         >
+          <IconWhatsApp className="h-5 w-5 shrink-0" />
           WhatsApp
         </a>
       </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { SHOP, shopWhatsAppHref } from "@/lib/branding";
+import { IconWhatsApp } from "@/app/components/BrandIcons";
 
 export function DeliverySection() {
   return (
@@ -34,11 +35,12 @@ export function DeliverySection() {
                 </a>{" "}
                 કરો અથવા{" "}
                 <a
-                  className="font-bold text-[#128C7E] underline"
+                  className="inline-flex items-center gap-1 font-bold text-[#25D366] underline"
                   href={shopWhatsAppHref()}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <IconWhatsApp className="h-4 w-4 shrink-0" />
                   WhatsApp
                 </a>{" "}
                 કરો.
