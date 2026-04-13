@@ -13,6 +13,7 @@ import {
   DELIVERY_FEE_BELOW_THRESHOLD_INR,
   DELIVERY_FREE_MIN_SUBTOTAL_INR,
 } from '@/lib/deliveryPricing'
+import {formatOrderSentAtIst} from '@/lib/formatOrderSentAtIst'
 import {menuCartItemKey, parsePriceInr} from '@/lib/menu'
 
 export type CartLine = {
@@ -29,20 +30,34 @@ function buildWhatsAppMessage(
   deliveryChargeInr: number,
   grandTotalInr: number,
   deliveryAddress: string,
+  deliveryMapUrl: string,
 ): string {
   if (lines.length === 0) return SHOP.whatsappOrderMessageGu
   const header = `નમસ્તે ${SHOP.name},\n\nઓર્ડર:\n`
   const body = lines
     .map(l => `${l.qty} × ${l.name} — ₹${l.priceInr * l.qty}`)
     .join('\n')
+  const lineItemsSumInr = lines.reduce((s, l) => s + l.priceInr * l.qty, 0)
   let totals = `\n\nવસ્તુઓ કુલ: ₹${subtotalInr}`
   if (deliveryChargeInr > 0) {
     totals += `\nડિલિવરી (ઓર્ડર ₹${DELIVERY_FREE_MIN_SUBTOTAL_INR}થી ઓછો): ₹${deliveryChargeInr}`
   }
   totals += `\nકુલ ચૂકવવાનું: ₹${grandTotalInr}`
+  const verifyLine =
+    deliveryChargeInr > 0
+      ? `\nચકાસણી (વસ્તુઓ નો સરવાળો  + ડિલિવરી): ₹${lineItemsSumInr} + ₹${deliveryChargeInr} = ₹${grandTotalInr}`
+      : `\nચકાસણી (વસ્તુઓ નો સરવાળો ): ₹${lineItemsSumInr} = વસ્તુઓ કુલ`
+  const sentAt = `\n\nઓર્ડર મોકલ્યાનો સમય (IST): ${formatOrderSentAtIst()}`
   const addr = deliveryAddress.trim()
-  const addrBlock = addr ? `\n\nડિલિવરી / પિકઅપ સરનામું:\n${addr}` : ''
-  return `${header}${body}${totals}${addrBlock}\n\n${SHOP.whatsappOrderMustCallGu}`
+  const map = deliveryMapUrl.trim()
+  let locationBlock = ''
+  if (addr || map) {
+    locationBlock = '\n\n'
+    if (addr) locationBlock += `ડિલિવરી / પિકઅપ સરનામું:\n${addr}`
+    if (addr && map) locationBlock += '\n\n'
+    if (map) locationBlock += `Google Maps લોકેશન:\n${map}`
+  }
+  return `${header}${body}${totals}${verifyLine}${sentAt}${locationBlock}\n\n${SHOP.whatsappOrderIntegrityNoteGu}\n\n${SHOP.whatsappOrderMustCallGu}`
 }
 
 type OrderCartContextValue = {
@@ -53,6 +68,8 @@ type OrderCartContextValue = {
   clear: () => void
   deliveryAddress: string
   setDeliveryAddress: (value: string) => void
+  deliveryMapUrl: string
+  setDeliveryMapUrl: (value: string) => void
   totalQty: number
   /** વસ્તુઓનો કુલ (ડિલિવરી વગર) */
   subtotalInr: number
@@ -76,6 +93,7 @@ export function useOrderCart() {
 export function OrderCartProvider({children}: {children: ReactNode}) {
   const [byKey, setByKey] = useState<Record<string, CartLine>>({})
   const [deliveryAddress, setDeliveryAddress] = useState('')
+  const [deliveryMapUrl, setDeliveryMapUrl] = useState('')
 
   const lines = useMemo(
     () =>
@@ -128,7 +146,11 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
     })
   }, [])
 
-  const clear = useCallback(() => setByKey({}), [])
+  const clear = useCallback(() => {
+    setByKey({})
+    setDeliveryAddress('')
+    setDeliveryMapUrl('')
+  }, [])
 
   const totalQty = useMemo(() => lines.reduce((s, l) => s + l.qty, 0), [lines])
   const subtotalInr = useMemo(
@@ -151,8 +173,16 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
         deliveryChargeInr,
         totalInr,
         deliveryAddress,
+        deliveryMapUrl,
       ),
-    [lines, subtotalInr, deliveryChargeInr, totalInr, deliveryAddress],
+    [
+      lines,
+      subtotalInr,
+      deliveryChargeInr,
+      totalInr,
+      deliveryAddress,
+      deliveryMapUrl,
+    ],
   )
 
   const value = useMemo(
@@ -164,6 +194,8 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
       clear,
       deliveryAddress,
       setDeliveryAddress,
+      deliveryMapUrl,
+      setDeliveryMapUrl,
       totalQty,
       subtotalInr,
       deliveryChargeInr,
@@ -178,6 +210,8 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
       clear,
       deliveryAddress,
       setDeliveryAddress,
+      deliveryMapUrl,
+      setDeliveryMapUrl,
       totalQty,
       subtotalInr,
       deliveryChargeInr,

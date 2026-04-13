@@ -1,5 +1,6 @@
 import { DeliverySection } from "./components/DeliverySection";
 import { FeaturedStrip } from "./components/FeaturedStrip";
+import { HomeSplashGate } from "./components/HomeSplashGate";
 import { HeroSection } from "./components/HeroSection";
 import { MenuSection } from "./components/MenuSection";
 import { MobileCallBar } from "./components/MobileCallBar";
@@ -12,6 +13,7 @@ import { SiteHeader } from "./components/SiteHeader";
 export default function Home() {
   return (
     <OrderCartProvider>
+      <HomeSplashGate />
       <SiteHeader />
       <main className="pb-28 md:pb-0">
         <HeroSection />

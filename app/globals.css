@@ -36,3 +36,130 @@ button,
 [role="button"] {
   touch-action: manipulation;
 }
+
+/* —— હોમ સ્પ્લેશ એનિમેશન —— */
+@keyframes pn-splash-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pn-splash-logo-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.82) rotate(-3deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes pn-splash-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.125rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pn-splash-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes pn-splash-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.pn-splash-backdrop {
+  animation: pn-splash-backdrop-in 0.55s ease-out forwards;
+}
+
+.pn-splash-logo-wrap {
+  animation: pn-splash-logo-pop 0.8s cubic-bezier(0.34, 1.45, 0.64, 1) forwards;
+}
+
+.pn-splash-rise-1 {
+  animation: pn-splash-rise 0.7s ease-out 0.1s both;
+}
+
+.pn-splash-rise-2 {
+  animation: pn-splash-rise 0.7s ease-out 0.22s both;
+}
+
+.pn-splash-rise-3 {
+  animation: pn-splash-rise 0.7s ease-out 0.34s both;
+}
+
+.pn-splash-skip-in {
+  animation: pn-splash-rise 0.5s ease-out 0.45s both;
+}
+
+.pn-splash-orb {
+  animation: pn-splash-glow-pulse 3.5s ease-in-out infinite;
+}
+
+.pn-splash-shimmer-bar {
+  height: 3px;
+  width: min(12rem, 70vw);
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--pn-gold) 55%, transparent),
+    color-mix(in srgb, var(--pn-orange) 45%, transparent),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: pn-splash-shimmer 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pn-splash-backdrop,
+  .pn-splash-logo-wrap,
+  .pn-splash-rise-1,
+  .pn-splash-rise-2,
+  .pn-splash-rise-3,
+  .pn-splash-skip-in,
+  .pn-splash-orb,
+  .pn-splash-shimmer-bar {
+    animation: none !important;
+  }
+
+  .pn-splash-backdrop {
+    opacity: 1;
+  }
+
+  .pn-splash-logo-wrap,
+  .pn-splash-rise-1,
+  .pn-splash-rise-2,
+  .pn-splash-rise-3,
+  .pn-splash-skip-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .pn-splash-orb {
+    opacity: 0.4;
+    transform: none;
+  }
+}
