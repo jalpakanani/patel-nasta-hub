@@ -28,3 +28,11 @@ body {
   color: var(--foreground);
   font-family: var(--font-mukta), "Mukta Vaani", system-ui, sans-serif;
 }
+
+/* Mobile: faster taps, fewer double-tap-zoom delays (Android / iOS) */
+button,
+[type="button"],
+[type="submit"],
+[role="button"] {
+  touch-action: manipulation;
+}

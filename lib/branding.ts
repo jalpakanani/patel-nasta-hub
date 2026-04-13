@@ -32,11 +32,20 @@ export const SHOP = {
   openingHoursLatin: '7:00 AM – 10:00 PM',
   featuredEyebrowGu: 'અમારી દુકાનની સૌથી ફેમસ આઇટમ',
   featuredEyebrowLatin: 'Our shop’s most famous item',
+  /** WhatsApp ઓર્ડર પછી કૉલ ફરજિયાત — UI અને ઓર્ડર મેસેજ */
+  whatsappOrderMustCallGu:
+    'મહત્વપૂર્ણ: WhatsApp પર ઓર્ડર મોકલ્યા પછી કન્ફર્મ માટે ફોન કરવો ફરજિયાત છે. કૉલ વગર ઓર્ડર કન્ફર્મ નહીં થાય.',
 } as const
 
-/** WhatsApp — default pre-fills short order message; `prefillOrder: false` for empty chat */
-export function shopWhatsAppHref(options?: { prefillOrder?: boolean }) {
+/** WhatsApp — `message` wins; else default draft; `prefillOrder: false` = empty chat */
+export function shopWhatsAppHref(options?: {
+  prefillOrder?: boolean
+  message?: string
+}) {
   const base = `https://wa.me/${SHOP.whatsappPhoneDigits}`
+  if (options?.message != null && options.message !== '') {
+    return `${base}?text=${encodeURIComponent(options.message)}`
+  }
   if (options?.prefillOrder === false) return base
   return `${base}?text=${encodeURIComponent(SHOP.whatsappOrderMessageGu)}`
 }

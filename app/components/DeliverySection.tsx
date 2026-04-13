@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { SHOP, shopWhatsAppHref } from "@/lib/branding";
 import { IconWhatsApp } from "@/app/components/BrandIcons";
+import { deliveryWebHighlightGu } from "@/lib/deliveryPricing";
 
 export function DeliverySection() {
   return (
@@ -50,7 +51,9 @@ export function DeliverySection() {
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--pn-gold)] text-sm font-bold text-[var(--pn-purple-deep)]">
                 2
               </span>
-              <span>અમે સમય અને એડ્રેસ કન્ફર્મ કરીશું.</span>
+              <span>
+                વેબ/WhatsApp પર લિસ્ટ મોકલ્યા પછી કન્ફર્મ માટે ફોન કરવો ફરજિયાત — કૉલ વગર ઓર્ડર પક્કો નહીં. પછી અમે કૉલ પર સમય અને સરનામું કન્ફર્મ કરીશું.
+              </span>
             </li>
             <li className="flex gap-3">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--pn-gold)] text-sm font-bold text-[var(--pn-purple-deep)]">
@@ -59,10 +62,15 @@ export function DeliverySection() {
               <span>તાજું પેક કરીને ઝડપથી ડિલિવર કરીશું.</span>
             </li>
           </ol>
-          <p className="mt-6 rounded-2xl bg-[var(--pn-purple)]/5 p-4 text-sm text-zinc-600">
-            દુકાન {SHOP.openingHoursGu} ખુલ્લી રહે છે. ₹300+ ઓર્ડર પર 2 કિ.મી. સુધી ફ્રી ડિલિવરી.
-            બાકીના કિસ્સામાં કૉલ પર વિગત મળશે.
-          </p>
+          <div className="mt-6 space-y-3">
+            <p className="rounded-2xl border border-amber-200/90 bg-amber-50/90 p-4 text-sm font-semibold leading-relaxed text-amber-950 shadow-sm">
+              {deliveryWebHighlightGu()}
+            </p>
+            <p className="rounded-2xl bg-[var(--pn-purple)]/5 p-4 text-sm text-zinc-600">
+              દુકાન {SHOP.openingHoursGu} ખુલ્લી રહે છે. ₹300+ ઓર્ડર પર 2 કિ.મી. સુધી ફ્રી ડિલિવરી.
+              બાકીના કિસ્સામાં કૉલ પર વિગત મળશે.
+            </p>
+          </div>
         </div>
       </div>
     </section>

@@ -3,6 +3,8 @@ export type MenuItem = {
   price: string
   /** Local `/images/...` or remote URL for Next/Image */
   image: string
+  /** દરેક કાર્ટ એકમ = આટલા ગ્રામ (દા.ત. 100 ગ્રામ પગલું) — UI વજન લેબલ માટે */
+  gramsPerCartStep?: number
   note?: string
   /** Small badges on menu cards */
   tags?: readonly string[]
@@ -18,6 +20,36 @@ export type MenuCategory = {
   id: string
   title: string
   items: MenuItem[]
+}
+
+/** `₹80`, `₹50 / 100 ગ્રામ` → પહેલું ₹ મૂલ્ય (કાર્ટ ટોટલ માટે) */
+export function parsePriceInr(price: string): number {
+  const m = price.match(/₹\s*(\d+)/)
+  if (m) return parseInt(m[1], 10)
+  const digits = price.replace(/\D/g, '')
+  const n = parseInt(digits, 10)
+  return Number.isFinite(n) ? n : 0
+}
+
+export function menuCartItemKey(categoryId: string, itemName: string): string {
+  return `${categoryId}::${itemName}`
+}
+
+/** `qty` કાર્ટ એકમ × `stepGrams` → ગુજરાતી વજન લેબલ (1000 ગ્રામ+ પર કિ.ગ્રા.) */
+export function formatGuWeightLabel(qty: number, stepGrams: number): string {
+  const g = qty * stepGrams
+  if (g >= 1000) {
+    const kg = g / 1000
+    const s =
+      kg % 1 === 0
+        ? String(kg)
+        : kg
+            .toFixed(2)
+            .replace(/\.?0+$/, '')
+            .replace(/\.$/, '')
+    return `${s} કિ.ગ્રા.`
+  }
+  return `${g} ગ્રામ`
 }
 
 /** પ્રિન્ટ પોસ્ટર (લેમિનેટેડ મેનુ) સાથે સરખું — ક્રમ અને ભાવ */
@@ -76,23 +108,27 @@ export const MENU_CATEGORIES: MenuCategory[] = [
       },
       {
         name: 'ભજીયા',
-        price: '₹50',
+        price: '₹50 / 100 ગ્રામ',
         image: '/images/menu-bhajiya.png',
+        gramsPerCartStep: 100,
       },
       {
         name: 'ગાઠીયા',
-        price: '₹50',
+        price: '₹50 / 100 ગ્રામ',
         image: '/images/menu-gathiya.png',
+        gramsPerCartStep: 100,
       },
       {
         name: 'ગોગળી કુંભણિયા',
-        price: '₹50',
+        price: '₹50 / 100 ગ્રામ',
         image: '/images/menu-kumbhaniya.png',
+        gramsPerCartStep: 100,
       },
       {
         name: 'ચિપ્સ (ફ્રેંચ ફ્રાઈ)',
-        price: '₹50',
+        price: '₹50 / 100 ગ્રામ',
         image: '/images/menu-french-fries.png',
+        gramsPerCartStep: 100,
       },
       {
         name: 'દહીં ભેળ',

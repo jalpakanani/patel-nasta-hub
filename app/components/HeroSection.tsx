@@ -6,7 +6,7 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden text-white">
       <div
-        className="absolute inset-0 bg-gradient-to-br from-[var(--pn-purple)] via-[var(--pn-purple-deep)] to-[var(--pn-gradient-end)]"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[var(--pn-purple)] via-[var(--pn-purple-deep)] to-[var(--pn-gradient-end)]"
         aria-hidden
       />
       <div

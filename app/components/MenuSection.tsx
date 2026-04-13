@@ -1,10 +1,8 @@
 import Image from 'next/image'
-import {
-  MENU_CATEGORIES,
-  MENU_NOTES,
-  PRINTED_MENU_ALT,
-  PRINTED_MENU_SRC,
-} from '@/lib/menu'
+import { MenuItemsGrid } from '@/app/components/MenuItemsGrid'
+import { SHOP } from '@/lib/branding'
+import { deliveryWebHighlightGu } from '@/lib/deliveryPricing'
+import { MENU_NOTES, PRINTED_MENU_ALT, PRINTED_MENU_SRC } from '@/lib/menu'
 
 export function MenuSection() {
   return (
@@ -21,71 +19,36 @@ export function MenuSection() {
             તાજો નાસ્તો, વ્યાજબી ભાવ
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-zinc-600">
-            મેનુમાંથી વસ્તુ પસંદ કરો, ફોન કે WhatsAppથી ઓર્ડર આપો ને ફ્રેશ
-            નાસ્તાનો આનંદ માણો.
+            દરેક વસ્તુની સંખ્યા પસંદ કરો, નીચે &quot;WhatsApp પર ઓર્ડર&quot;
+            દબાવો — તમારી યાદી અને કુલ રકમ WhatsApp પર મોકલાશે.
           </p>
         </div>
 
-        <div className="space-y-16">
-          {MENU_CATEGORIES.map(cat => (
-            <div key={cat.id}>
-              <h3 className="mb-6 flex items-center gap-3 text-xl font-bold text-[var(--pn-red)]">
-                <span className="h-1 w-8 rounded-full bg-[var(--pn-orange)]" />
-                {cat.title}
-              </h3>
-              <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {cat.items.map(item => (
-                  <li
-                    key={`${cat.id}-${item.name}`}
-                    className="flex overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-sm transition hover:shadow-md"
-                  >
-                    <div className="relative h-28 w-28 shrink-0 sm:h-32 sm:w-32">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 112px, 128px"
-                      />
-                    </div>
-                    <div className="flex min-w-0 flex-1 flex-col justify-center p-3 sm:p-4">
-                      <div className="flex flex-wrap items-center gap-1.5">
-                        <p className="break-words font-bold leading-snug text-zinc-900">
-                          {item.name}
-                        </p>
-                        {item.featured ? (
-                          <span className="shrink-0 rounded-full bg-[var(--pn-gold)]/25 px-2 py-0.5 text-[0.6rem] font-extrabold uppercase tracking-wide text-[var(--pn-purple-deep)] ring-1 ring-[var(--pn-gold)]/40">
-                            ફેમસ પિક
-                          </span>
-                        ) : null}
-                      </div>
-                      {item.tags?.length ? (
-                        <div className="mt-1.5 flex flex-wrap gap-1">
-                          {item.tags.map(tag => (
-                            <span
-                              key={`${item.name}-${tag}`}
-                              className="inline-block rounded-full bg-[var(--pn-orange)]/15 px-2 py-0.5 text-[0.65rem] font-bold text-[var(--pn-red)]"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      ) : null}
-                      {item.note ? (
-                        <p className="mt-1 text-xs text-zinc-500">
-                          {item.note}
-                        </p>
-                      ) : null}
-                      <p className="mt-2 text-lg font-extrabold text-[var(--pn-purple)]">
-                        {item.price}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div
+          className="mx-auto mb-10 max-w-2xl rounded-2xl border border-amber-300/80 bg-gradient-to-br from-amber-50 via-orange-50/90 to-amber-50/70 px-4 py-3.5 text-center shadow-sm ring-1 ring-amber-200/50 sm:px-5"
+          role="note"
+        >
+          <p className="text-[0.8125rem] font-extrabold uppercase tracking-wide text-amber-950/90 sm:text-xs">
+            ડિલિવરી ચાર્જ
+          </p>
+          <p className="mt-1.5 text-sm font-semibold leading-snug text-amber-950 sm:text-[0.9375rem]">
+            {deliveryWebHighlightGu()}
+          </p>
         </div>
+
+        <div
+          className="mx-auto mb-10 max-w-2xl rounded-2xl border border-[var(--pn-purple)]/35 bg-[var(--pn-purple)]/6 px-4 py-3.5 text-center shadow-sm ring-1 ring-[var(--pn-purple)]/10 sm:px-5"
+          role="note"
+        >
+          <p className="text-[0.8125rem] font-extrabold uppercase tracking-wide text-[var(--pn-purple-deep)] sm:text-xs">
+            ઓર્ડર કન્ફર્મ કરવા
+          </p>
+          <p className="mt-1.5 text-sm font-semibold leading-snug text-zinc-800 sm:text-[0.9375rem]">
+            {SHOP.whatsappOrderMustCallGu}
+          </p>
+        </div>
+
+        <MenuItemsGrid />
 
         <div className="mt-12 rounded-2xl border border-dashed border-[var(--pn-gold)]/60 bg-white/60 p-5 text-center text-sm font-medium text-zinc-700">
           {MENU_NOTES.map(line => (
