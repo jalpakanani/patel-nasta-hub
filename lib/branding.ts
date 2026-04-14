@@ -17,7 +17,6 @@ export const SHOP = {
   mapsUrl:
     `https://www.google.com/maps/place/22%C2%B013'10.9%22N+70%C2%B036'31.5%22E/@22.219698,70.6061821,726m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d22.219698!4d70.608757?hl=en&entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D` +
     encodeURIComponent('Patel Nasta Hub Chhapra GIDC Kalavad Road Gujarat'),
-  /** Hashtag explore until a single official profile URL is set */
   instagramUrl: 'https://www.instagram.com/patel_nasta_hub/',
   addressLines: [
     'છાપરા જી.આઈ.ડી.સી., કાલાવડ રોડ, છાપરા',
@@ -32,15 +31,12 @@ export const SHOP = {
   openingHoursLatin: '7:00 AM – 10:00 PM',
   featuredEyebrowGu: 'અમારી દુકાનની સૌથી ફેમસ આઇટમ',
   featuredEyebrowLatin: 'Our shop’s most famous item',
-  /** WhatsApp ઓર્ડર પછી કૉલ ફરજિયાત — UI અને ઓર્ડર મેસેજ */
   whatsappOrderMustCallGu:
     'મહત્વપૂર્ણ: WhatsApp પર ઓર્ડર મોકલ્યા પછી કન્ફર્મ માટે ફોન કરવો ફરજિયાત છે. કૉલ વગર ઓર્ડર કન્ફર્મ નહીં થાય.',
-  /** ઓર્ડર મેસેજ — રકમ ફેરફાર વિશે દુકાન માટે સ્પષ્ટતા */
   whatsappOrderIntegrityNoteGu:
     'નોંધ: ઉપર દરેક પંક્તિના રૂપિયા જોડીને "વસ્તુઓ કુલ" સાથે મેળ ખાવા જોઈએ. રકમમાં શંકા હોય અથવા મેસેજ ફેરફારેલો લાગે તો મેનુ મુજબ કૉલ પર ચોક્કસ કરજો — ફક્ત WhatsApp લખાણથી ઓર્ડર કન્ફર્મ થતો નથી.',
 } as const
 
-/** WhatsApp — `message` wins; else default draft; `prefillOrder: false` = empty chat */
 export function shopWhatsAppHref(options?: {
   prefillOrder?: boolean
   message?: string

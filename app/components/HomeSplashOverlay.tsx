@@ -7,10 +7,6 @@ import {SHOP} from '@/lib/branding'
 const VISIBLE_MS = 1000
 const FADE_MS = 600
 
-/**
- * હોમ ખુલતાં ટૂંકો બ્રાન્ડ સ્પ્લેશ (આપમેળે ફેડ પછી બંધ).
- * "છોડો" / "ચાલુ કરો" / સ્ક્રીન પર ટેપ / Esc વહેલું બંધ કરે છે.
- */
 export function HomeSplashOverlay() {
   const timersRef = useRef<{fade?: number; hide?: number}>({})
   const [phase, setPhase] = useState<'on' | 'fade' | 'off'>('on')
@@ -62,7 +58,6 @@ export function HomeSplashOverlay() {
 
   if (phase === 'off') return null
 
-  /** ફેડ દરમ્યાન `pn-splash-backdrop` ન કાઢતાં `forwards` ઓપેસિટી પર ભારે પડે (મોબાઇલ પર સ્પ્લાશ ન ઉતરતો લાગે). */
   const backdropMotionClass =
     phase === 'on' ? 'pn-splash-backdrop opacity-100' : ''
 

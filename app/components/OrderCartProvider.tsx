@@ -71,11 +71,8 @@ type OrderCartContextValue = {
   deliveryMapUrl: string
   setDeliveryMapUrl: (value: string) => void
   totalQty: number
-  /** વસ્તુઓનો કુલ (ડિલિવરી વગર) */
   subtotalInr: number
-  /** ₹300થી ઓછા ઓર્ડર પર ડિલિવરી ફી; નહીંતર 0 */
   deliveryChargeInr: number
-  /** subtotal + delivery — ચૂકવવાનું કુલ */
   totalInr: number
   whatsappMessage: string
 }

@@ -211,6 +211,17 @@ export const MENU_CATEGORIES: MenuCategory[] = [
   },
 ]
 
+/** કાર્ટ લાઇન `key` (`categoryId::itemName`) માટે મેનુમાંથી વજન પગલું — કાર્ટ UI માટે */
+export function gramsPerCartStepForCartKey(cartKey: string): number | undefined {
+  const sep = '::'
+  const i = cartKey.indexOf(sep)
+  if (i === -1) return undefined
+  const categoryId = cartKey.slice(0, i)
+  const itemName = cartKey.slice(i + sep.length)
+  const cat = MENU_CATEGORIES.find(c => c.id === categoryId)
+  return cat?.items.find(it => it.name === itemName)?.gramsPerCartStep
+}
+
 export function getFeaturedSpotlight(): {
   name: string
   price: string
