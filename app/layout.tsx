@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="gu" className={`${mukta.variable} h-full`} style={{ colorScheme: "light" }}>
+    <html lang="gu" className={`${mukta.variable} h-full scroll-smooth`} style={{ colorScheme: "light" }}>
       {/* Browser extensions (e.g. ColorZilla) inject body attrs — avoids dev hydration noise */}
       <body
         className="min-h-full bg-[var(--pn-cream)] pb-20 font-sans text-zinc-900 antialiased md:pb-0"
