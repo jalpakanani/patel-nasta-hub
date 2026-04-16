@@ -5,7 +5,7 @@ function siteOrigin(): string {
   if (typeof w === 'string' && w.length > 0) {
     return w.replace(/\/$/, '')
   }
-  return 'https://www.patelnastahub.com'
+  return 'https://patel-nasta-hub.netlify.app'
 }
 
 export function localBusinessJsonLd() {

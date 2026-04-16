@@ -4,7 +4,9 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from 'react'
@@ -15,6 +17,7 @@ import {
 } from '@/lib/deliveryPricing'
 import {formatOrderSentAtIst} from '@/lib/formatOrderSentAtIst'
 import {menuCartItemKey, parsePriceInr} from '@/lib/menu'
+import {readSavedDelivery, writeSavedDelivery} from '@/lib/savedDeliveryLocation'
 
 export type CartLine = {
   key: string
@@ -91,6 +94,24 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
   const [byKey, setByKey] = useState<Record<string, CartLine>>({})
   const [deliveryAddress, setDeliveryAddress] = useState('')
   const [deliveryMapUrl, setDeliveryMapUrl] = useState('')
+  const skipFirstPersist = useRef(true)
+
+  useEffect(() => {
+    const s = readSavedDelivery()
+    if (s?.address) setDeliveryAddress(s.address)
+    if (s?.mapUrl) setDeliveryMapUrl(s.mapUrl)
+  }, [])
+
+  useEffect(() => {
+    if (skipFirstPersist.current) {
+      skipFirstPersist.current = false
+      return
+    }
+    const id = window.setTimeout(() => {
+      writeSavedDelivery(deliveryAddress, deliveryMapUrl)
+    }, 650)
+    return () => window.clearTimeout(id)
+  }, [deliveryAddress, deliveryMapUrl])
 
   const lines = useMemo(
     () =>
@@ -145,8 +166,7 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
 
   const clear = useCallback(() => {
     setByKey({})
-    setDeliveryAddress('')
-    setDeliveryMapUrl('')
+    /* સરનામું / મેપ ફોન પર ફરીથી ઓર્ડર માટે યાદ રાખો — ફક્ત કાર્ટ આઇટમ ખાલી. */
   }, [])
 
   const totalQty = useMemo(() => lines.reduce((s, l) => s + l.qty, 0), [lines])

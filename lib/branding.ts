@@ -13,7 +13,8 @@ export const SHOP = {
   whatsappPhoneDigits: WHATSAPP_DIGITS,
   whatsappOrderMessageGu: WHATSAPP_ORDER_MESSAGE_GU,
 
-  website: 'https://www.patelnastahub.com',
+  /** Live site — custom domain પછી અહીં અપડેટ કરજો */
+  website: 'https://patel-nasta-hub.netlify.app',
   mapsUrl:
     `https://www.google.com/maps/place/22%C2%B013'10.9%22N+70%C2%B036'31.5%22E/@22.219698,70.6061821,726m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d22.219698!4d70.608757?hl=en&entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D` +
     encodeURIComponent('Patel Nasta Hub Chhapra GIDC Kalavad Road Gujarat'),

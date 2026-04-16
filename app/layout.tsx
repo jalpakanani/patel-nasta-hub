@@ -16,7 +16,15 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+/** Site visit stats — `.env.local`: NEXT_PUBLIC_PLAUSIBLE_DOMAIN=patelnastahub.com OR NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXX */
+const plausibleRaw = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN?.trim()
+const plausibleDomain =
+  plausibleRaw && /^[\w.-]+$/.test(plausibleRaw) ? plausibleRaw : undefined
+const gaRaw = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
+const gaMeasurementId = gaRaw && /^G-[A-Z0-9]+$/i.test(gaRaw) ? gaRaw : undefined
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SHOP.website),
   title: `${SHOP.name} | ${SHOP.nameLatin}`,
   description: `${SHOP.tagline} — મેનુ, ભાવ, હોમ ડિલિવરી અને UPI ચૂકવણી.`,
   /** Favicon: `app/favicon.ico` (ICO) + `app/icon.png` / `apple-icon.png` */
@@ -46,6 +54,26 @@ export default function RootLayout({
             __html: JSON.stringify(localBusinessJsonLd()),
           }}
         />
+        {plausibleDomain ? (
+          <script
+            defer
+            data-domain={plausibleDomain}
+            src="https://plausible.io/js/script.js"
+          />
+        ) : null}
+        {gaMeasurementId ? (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaMeasurementId)}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`,
+              }}
+            />
+          </>
+        ) : null}
         {children}
       </body>
     </html>

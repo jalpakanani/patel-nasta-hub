@@ -6,6 +6,7 @@ import { IconWhatsApp } from '@/app/components/BrandIcons'
 import { useOrderCart } from '@/app/components/OrderCartProvider'
 import { deliveryBelowMinLabelGu } from '@/lib/deliveryPricing'
 import { googleMapsPinUrlFromCoords } from '@/lib/googleMapsLinks'
+import { writeSavedDelivery } from '@/lib/savedDeliveryLocation'
 import {
   formatGuWeightLabel,
   gramsPerCartStepForCartKey,
@@ -52,6 +53,7 @@ export function OrderCartBar() {
       return
     }
     setAddressError(null)
+    writeSavedDelivery(deliveryAddress, deliveryMapUrl)
     window.open(href, '_blank', 'noopener,noreferrer')
   }
 
@@ -264,6 +266,9 @@ export function OrderCartBar() {
                       : 'border-zinc-200 focus:border-[var(--pn-purple)] focus:ring-[var(--pn-purple)]/25'
                   }`}
                 />
+                <p className="mt-1 text-[0.625rem] leading-snug text-zinc-500">
+                  આ ફોન/બ્રાઉઝર પર યાદ રાખાશે — બીજા સરનામે ઓર્ડર હોય તો અહીં બદલી લખો.
+                </p>
               </div>
 
               <details className="rounded-lg border border-zinc-200 bg-zinc-50/90 open:border-zinc-300">
