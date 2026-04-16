@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { HelpOrderVideo } from "@/app/components/HelpOrderVideo";
 import { MobileCallBar } from "@/app/components/MobileCallBar";
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
@@ -25,7 +26,7 @@ const steps = [
   },
   {
     title: "સરનામું ફરજિયાત ભરો",
-    body: "“સરનામું (WhatsApp) * ફરજિયાત” નીચેનું બોક્સ ખાલી ન રાખો — એરિયા, લેન્ડમાર્ક, ફ્લેટ વગેરે સ્પષ્ટ લખો. આ વગર લીલું “WhatsApp પર ઓર્ડર” બટન ઓર્ડર મોકલશે નહીં; ભૂલશો તો “ઓર્ડર માટે સરનામું લખવું ફરજિયાત છે — નીચે ભરો.” દેખાશે.",
+    body: "“સરનામું (WhatsApp) * ફરજિયાત” નીચેનું બોક્સ ખાલી ન રાખો — એરિયા, લેન્ડમાર્ક, ફ્લેટ વગેરે સ્પષ્ટ લખો. આ વગર લીલું “WhatsApp પર ઓર્ડર” બટન ઓર્ડર મોકલશે નહીં, “ઓર્ડર માટે સરનામું લખવું ફરજિયાત છે — નીચે ભરો.”.",
   },
   {
     title: "મેપ લિંક (વૈકલ્પિક)",
@@ -60,6 +61,19 @@ export default function HelpPage() {
         <p className="mx-auto mt-4 max-w-xl rounded-xl border border-orange-200/90 bg-orange-50/95 px-4 py-3 text-center text-sm font-semibold leading-snug text-zinc-900">
           {SHOP.whatsappOrderMustCallGu}
         </p>
+
+        <section className="mx-auto mt-10 max-w-xl" aria-labelledby="help-video-heading">
+          <h2
+            id="help-video-heading"
+            className="text-center text-base font-extrabold text-[var(--pn-purple-deep)]"
+          >
+            ટૂંકો વિડિયો
+          </h2>
+          <p className="mt-1 text-center text-xs text-zinc-600">કાર્ટ, સરનામું અને WhatsApp ઓર્ડર — નિહાળો</p>
+          <div className="mt-3 overflow-hidden rounded-2xl border border-[#4a1f13]/10 shadow-lg ring-1 ring-black/[0.04]">
+            <HelpOrderVideo />
+          </div>
+        </section>
 
         <ol className="mt-10 space-y-4">
           {steps.map((step, i) => (
