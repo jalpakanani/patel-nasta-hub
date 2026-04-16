@@ -1,11 +1,46 @@
 'use client'
 
 import Image from 'next/image'
-import {useCallback, useEffect, useRef, useState} from 'react'
+import {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react'
 import {SHOP} from '@/lib/branding'
 
 const VISIBLE_MS = 1000
 const FADE_MS = 600
+
+/**
+ * Browser me ek baar dismiss / animation chalu thay pachhi splash phari nathi batvo.
+ * (sessionStorage karta vadhare stable — refresh, home ↔ help, dev Strict Mode.)
+ */
+const SPLASH_DISMISSED_KEY = 'pn:splash:dismissed:v1'
+
+function markSplashDismissed() {
+  try {
+    window.localStorage.setItem(SPLASH_DISMISSED_KEY, '1')
+  } catch {
+    /* private / quota */
+  }
+}
+
+function hasSplashDismissed() {
+  try {
+    return window.localStorage.getItem(SPLASH_DISMISSED_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+/** `/help` થી `/#menu` વગેરે — સીધા સેક્શન પર આવ્યા હોય ત્યારે સ્પ્લાશ ન બતાવવો. */
+const HOME_SECTION_HASHES = new Set([
+  '#menu',
+  '#delivery',
+  '#pay',
+  '#contact',
+])
+
+function shouldSkipSplashForSectionHash() {
+  if (typeof window === 'undefined') return false
+  return HOME_SECTION_HASHES.has(window.location.hash)
+}
 
 export function HomeSplashOverlay() {
   const timersRef = useRef<{fade?: number; hide?: number}>({})
@@ -21,14 +56,20 @@ export function HomeSplashOverlay() {
 
   const dismissNow = useCallback(() => {
     clearSplashTimers()
+    markSplashDismissed()
     setPhase('off')
   }, [clearSplashTimers])
 
-  useEffect(() => {
-    timersRef.current.fade = window.setTimeout(
-      () => setPhase('fade'),
-      VISIBLE_MS,
-    )
+  useLayoutEffect(() => {
+    if (hasSplashDismissed() || shouldSkipSplashForSectionHash()) {
+      setPhase('off')
+      return
+    }
+
+    timersRef.current.fade = window.setTimeout(() => {
+      markSplashDismissed()
+      setPhase('fade')
+    }, VISIBLE_MS)
     timersRef.current.hide = window.setTimeout(() => {
       setPhase('off')
     }, VISIBLE_MS + FADE_MS)

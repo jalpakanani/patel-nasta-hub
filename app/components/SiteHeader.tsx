@@ -2,13 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { SHOP, shopWhatsAppHref } from '@/lib/branding'
 import { IconWhatsApp } from '@/app/components/BrandIcons'
-
-const nav = [
-  {href: '#menu', label: 'મેનુ'},
-  {href: '#delivery', label: 'ડિલિવરી'},
-  {href: '#pay', label: 'ચૂકવણી'},
-  {href: '#contact', label: 'સંપર્ક'},
-]
+import { SiteHeaderNav } from '@/app/components/SiteHeaderNav'
 
 export function SiteHeader() {
   return (
@@ -35,20 +29,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav
-          className="hidden items-center gap-1 md:flex"
-          aria-label="મુખ્ય નેવિગેશન"
-        >
-          {nav.map(item => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="rounded-full px-3 py-2 text-sm font-semibold text-[var(--pn-purple-deep)] transition hover:bg-white/80"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <SiteHeaderNav row="bar" />
 
         <div className="flex shrink-0 items-center gap-2">
           <a
@@ -69,20 +50,7 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <nav
-        className="flex gap-2 overflow-x-auto border-t border-[#4a1f13]/10 px-4 py-2.5 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] sm:px-6 md:hidden [&::-webkit-scrollbar]:hidden"
-        aria-label="સેક્શન પર જાઓ"
-      >
-        {nav.map(item => (
-          <a
-            key={item.href}
-            href={item.href}
-            className="shrink-0 rounded-full border border-[var(--pn-purple-deep)]/12 bg-white/70 px-4 py-2.5 text-sm font-semibold text-[var(--pn-purple-deep)] shadow-sm active:bg-white"
-          >
-            {item.label}
-          </a>
-        ))}
-      </nav>
+      <SiteHeaderNav row="rail" />
     </header>
   )
 }

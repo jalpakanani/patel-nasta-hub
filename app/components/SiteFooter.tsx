@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SHOP, shopWhatsAppHref } from "@/lib/branding";
 import { IconInstagram, IconMapPin, IconWhatsApp } from "@/app/components/BrandIcons";
 
@@ -49,6 +50,14 @@ export function SiteFooter() {
                   <IconWhatsApp className="h-4 w-4 shrink-0" />
                   WhatsApp ઓર્ડર
                 </a>
+              </li>
+              <li>
+                <Link
+                  className="text-sm font-semibold text-[var(--pn-gold)] underline-offset-2 hover:underline"
+                  href="/help"
+                >
+                  વેબથી ઓર્ડર કેવી રીતે કરવો
+                </Link>
               </li>
              
              
