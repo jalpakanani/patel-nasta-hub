@@ -4,7 +4,8 @@ import { HelpOrderVideo } from "@/app/components/HelpOrderVideo";
 import { MobileCallBar } from "@/app/components/MobileCallBar";
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
-import { SHOP, shopWhatsAppHref } from "@/lib/branding";
+import { GatedShopWhatsApp } from "@/app/components/GatedShopWhatsApp";
+import { SHOP } from "@/lib/branding";
 
 export const metadata: Metadata = {
   title: `વેબ ઓર્ડર મદદ | ${SHOP.nameLatin}`,
@@ -54,8 +55,8 @@ export default function HelpPage() {
           વેબથી ઓર્ડર કેવી રીતે કરવો
         </h1>
         <p className="mx-auto mt-3 max-w-xl text-center text-base leading-relaxed text-zinc-700">
-          પહેલા મેનુમાં વસ્તુ ઉમેરો, પછી નીચેની કાર્ટ પટ્ટી ખોલો. સરનામું ભર્યા પછી જ WhatsApp પર ઓર્ડર મોકલાશે. કંઈ સમજાય નહીં તો કૉલ અથવા WhatsApp
-          કરો.
+          પહેલા મેનુમાં વસ્તુ ઉમેરો, પછી નીચેની કાર્ટ પટ્ટી ખોલો. સરનામું ભર્યા પછી જ WhatsApp પર ઓર્ડર મોકલાશે. કંઈ સમજાય નહીં તો કૉલ કરો — સાઇટ પર WhatsApp
+          ખાલી કાર્ટ સાથે ખુલશે નહીં; પહેલા + થી વસ્તુ ઉમેરો.
         </p>
 
         <p className="mx-auto mt-4 max-w-xl rounded-xl border border-orange-200/90 bg-orange-50/95 px-4 py-3 text-center text-sm font-semibold leading-snug text-zinc-900">
@@ -109,14 +110,9 @@ export default function HelpPage() {
           >
             મેનુ પર જાઓ
           </Link>
-          <a
-            href={shopWhatsAppHref()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center justify-center rounded-full border-2 border-[#25D366] bg-[#25D366]/10 px-6 py-3 text-sm font-bold text-[#25D366] transition hover:bg-[#25D366]/15"
-          >
+          <GatedShopWhatsApp className="inline-flex min-h-11 w-full items-center justify-center rounded-full border-2 border-[#25D366] bg-[#25D366]/10 px-6 py-3 text-sm font-bold text-[#25D366] transition hover:bg-[#25D366]/15 sm:w-auto disabled:hover:bg-[#25D366]/10">
             WhatsApp થી મદદ
-          </a>
+          </GatedShopWhatsApp>
         </div>
       </main>
       <SiteFooter />

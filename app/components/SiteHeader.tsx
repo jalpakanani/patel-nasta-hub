@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { SHOP, shopWhatsAppHref } from '@/lib/branding'
+import { SHOP } from '@/lib/branding'
+import { GatedShopWhatsApp } from '@/app/components/GatedShopWhatsApp'
 import { IconWhatsApp } from '@/app/components/BrandIcons'
 import { SiteHeaderNav } from '@/app/components/SiteHeaderNav'
 
@@ -32,15 +33,10 @@ export function SiteHeader() {
         <SiteHeaderNav row="bar" />
 
         <div className="flex shrink-0 items-center gap-2">
-          <a
-            href={shopWhatsAppHref()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden items-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-2 text-sm font-semibold text-[#25D366] sm:inline-flex"
-          >
+          <GatedShopWhatsApp className="hidden items-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-2 text-sm font-semibold text-[#25D366] sm:inline-flex">
             <IconWhatsApp className="h-4 w-4" />
             WhatsApp
-          </a>
+          </GatedShopWhatsApp>
           <a
             href={`tel:${SHOP.phoneTel}`}
             className="inline-flex min-h-11 min-w-[5.5rem] items-center justify-center rounded-full bg-[var(--pn-purple)] px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-[var(--pn-purple)]/25 transition hover:brightness-110"

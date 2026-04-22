@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Mukta_Vaani } from "next/font/google";
 import "./globals.css";
+import { AppOrderShell } from "@/app/components/AppOrderShell";
 import { SHOP } from "@/lib/branding";
 import { localBusinessJsonLd } from "@/lib/localBusinessJsonLd";
 
@@ -74,7 +75,7 @@ export default function RootLayout({
             />
           </>
         ) : null}
-        {children}
+        <AppOrderShell>{children}</AppOrderShell>
       </body>
     </html>
   );

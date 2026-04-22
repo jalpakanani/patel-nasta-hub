@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { SHOP, shopWhatsAppHref } from "@/lib/branding";
+import { SHOP } from "@/lib/branding";
+import { GatedShopWhatsApp } from "@/app/components/GatedShopWhatsApp";
 import { IconWhatsApp } from "@/app/components/BrandIcons";
 import { deliveryWebHighlightGu } from "@/lib/deliveryPricing";
 
@@ -35,15 +36,10 @@ export function DeliverySection() {
                   કૉલ
                 </a>{" "}
                 કરો અથવા{" "}
-                <a
-                  className="inline-flex items-center gap-1 font-bold text-[#25D366] underline"
-                  href={shopWhatsAppHref()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <GatedShopWhatsApp className="inline-flex items-center gap-1 border-0 bg-transparent p-0 font-bold text-[#25D366] underline disabled:no-underline">
                   <IconWhatsApp className="h-4 w-4 shrink-0" />
                   WhatsApp
-                </a>{" "}
+                </GatedShopWhatsApp>{" "}
                 કરો.
               </span>
             </li>

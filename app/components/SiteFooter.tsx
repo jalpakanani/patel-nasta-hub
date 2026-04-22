@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { SHOP, shopWhatsAppHref } from "@/lib/branding";
+import { SHOP } from "@/lib/branding";
+import { GatedShopWhatsApp } from "@/app/components/GatedShopWhatsApp";
 import { IconInstagram, IconMapPin, IconWhatsApp } from "@/app/components/BrandIcons";
 
 export function SiteFooter() {
@@ -41,15 +42,10 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <a
-                  className="inline-flex items-center gap-2 font-semibold text-[#25D366] hover:underline"
-                  href={shopWhatsAppHref()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <GatedShopWhatsApp className="inline-flex items-center gap-2 border-0 bg-transparent p-0 text-left font-semibold text-[#25D366] hover:underline">
                   <IconWhatsApp className="h-4 w-4 shrink-0" />
                   WhatsApp ઓર્ડર
-                </a>
+                </GatedShopWhatsApp>
               </li>
               <li>
                 <Link

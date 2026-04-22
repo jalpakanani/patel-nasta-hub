@@ -75,7 +75,7 @@ export function HeroSection() {
               </Link>
               <a
                 href={`tel:${SHOP.phoneTel}`}
-                className="inline-flex min-h-10 w-full items-center justify-center rounded-full border-2 border-white/70 bg-white/5 px-5 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition hover:border-[var(--pn-gold)] hover:bg-white/10 sm:min-h-11 sm:px-6 sm:py-3 sm:text-base sm:w-auto"
+                className="inline-flex min-h-10 w-full appearance-none items-center justify-center rounded-full border-2 border-white/70 bg-[rgba(255,255,255,0.14)] px-5 py-2.5 text-sm font-bold text-white transition hover:border-[var(--pn-gold)] hover:bg-[rgba(255,255,255,0.24)] active:bg-[rgba(255,255,255,0.2)] sm:min-h-11 sm:px-6 sm:py-3 sm:text-base sm:w-auto"
               >
                 ઓર્ડર માટે કૉલ
               </a>

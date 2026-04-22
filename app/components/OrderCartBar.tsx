@@ -3,7 +3,10 @@
 import { useEffect, useState } from 'react'
 import { SHOP, shopWhatsAppHref } from '@/lib/branding'
 import { IconWhatsApp } from '@/app/components/BrandIcons'
-import { useOrderCart } from '@/app/components/OrderCartProvider'
+import {
+  ORDER_DELIVERY_ADDRESS_REQUIRED_GU,
+  useOrderCart,
+} from '@/app/components/OrderCartProvider'
 import { deliveryBelowMinLabelGu } from '@/lib/deliveryPricing'
 import { googleMapsPinUrlFromCoords } from '@/lib/googleMapsLinks'
 import { writeSavedDelivery } from '@/lib/savedDeliveryLocation'
@@ -30,6 +33,7 @@ export function OrderCartBar() {
     setDeliveryAddress,
     deliveryMapUrl,
     setDeliveryMapUrl,
+    cartAddressFocusToken,
   } = useOrderCart()
 
   const [panelOpen, setPanelOpen] = useState(true)
@@ -40,13 +44,25 @@ export function OrderCartBar() {
     if (lines.length === 0) setPanelOpen(true)
   }, [lines.length])
 
+  useEffect(() => {
+    if (cartAddressFocusToken === 0 || lines.length === 0) return
+    setPanelOpen(true)
+    setAddressError(ORDER_DELIVERY_ADDRESS_REQUIRED_GU)
+    const id = window.requestAnimationFrame(() => {
+      const el = document.getElementById('order-delivery-address')
+      el?.focus({ preventScroll: true })
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
+    return () => window.cancelAnimationFrame(id)
+  }, [cartAddressFocusToken, lines.length])
+
   if (lines.length === 0) return null
 
   const href = shopWhatsAppHref({ message: whatsappMessage })
 
   function openWhatsAppOrder() {
     if (!deliveryAddress.trim()) {
-      setAddressError('ઓર્ડર માટે સરનામું લખવું ફરજિયાત છે — નીચે ભરો.')
+      setAddressError(ORDER_DELIVERY_ADDRESS_REQUIRED_GU)
       const el = document.getElementById('order-delivery-address')
       el?.focus({ preventScroll: true })
       el?.scrollIntoView({ behavior: 'smooth', block: 'center' })

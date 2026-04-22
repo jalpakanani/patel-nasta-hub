@@ -19,6 +19,10 @@ import {formatOrderSentAtIst} from '@/lib/formatOrderSentAtIst'
 import {menuCartItemKey, parsePriceInr} from '@/lib/menu'
 import {readSavedDelivery, writeSavedDelivery} from '@/lib/savedDeliveryLocation'
 
+/** કાર્ટ / બહારનો WhatsApp — સરનામું ખાલી હોય ત્યારે */
+export const ORDER_DELIVERY_ADDRESS_REQUIRED_GU =
+  'ઓર્ડર માટે સરનામું લખવું ફરજિયાત છે — નીચે ભરો.' as const
+
 export type CartLine = {
   key: string
   name: string
@@ -78,6 +82,9 @@ type OrderCartContextValue = {
   deliveryChargeInr: number
   totalInr: number
   whatsappMessage: string
+  /** Header/footer WhatsApp જ્યારે સરનામું ખાલી — કાર્ટ ખોલી સરનામું પર ફોકસ */
+  cartAddressFocusToken: number
+  requestCartAddressFocus: () => void
 }
 
 const OrderCartContext = createContext<OrderCartContextValue | null>(null)
@@ -94,7 +101,12 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
   const [byKey, setByKey] = useState<Record<string, CartLine>>({})
   const [deliveryAddress, setDeliveryAddress] = useState('')
   const [deliveryMapUrl, setDeliveryMapUrl] = useState('')
+  const [cartAddressFocusToken, setCartAddressFocusToken] = useState(0)
   const skipFirstPersist = useRef(true)
+
+  const requestCartAddressFocus = useCallback(() => {
+    setCartAddressFocusToken(n => n + 1)
+  }, [])
 
   useEffect(() => {
     const s = readSavedDelivery()
@@ -218,6 +230,8 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
       deliveryChargeInr,
       totalInr,
       whatsappMessage,
+      cartAddressFocusToken,
+      requestCartAddressFocus,
     }),
     [
       lines,
@@ -234,6 +248,8 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
       deliveryChargeInr,
       totalInr,
       whatsappMessage,
+      cartAddressFocusToken,
+      requestCartAddressFocus,
     ],
   )
 
