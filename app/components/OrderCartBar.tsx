@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { SHOP, shopWhatsAppHref } from '@/lib/branding'
+import { trackWhatsAppTap } from '@/lib/analytics'
 import { IconWhatsApp } from '@/app/components/BrandIcons'
 import {
   ORDER_DELIVERY_ADDRESS_REQUIRED_GU,
@@ -62,6 +63,11 @@ export function OrderCartBar() {
 
   function openWhatsAppOrder() {
     if (!deliveryAddress.trim()) {
+      trackWhatsAppTap({
+        placement: 'cart_bar_order',
+        outcome: 'blocked_no_address',
+        cartLineCount: lines.length,
+      })
       setAddressError(ORDER_DELIVERY_ADDRESS_REQUIRED_GU)
       const el = document.getElementById('order-delivery-address')
       el?.focus({ preventScroll: true })
@@ -69,6 +75,11 @@ export function OrderCartBar() {
       return
     }
     setAddressError(null)
+    trackWhatsAppTap({
+      placement: 'cart_bar_order',
+      outcome: 'opened',
+      cartLineCount: lines.length,
+    })
     writeSavedDelivery(deliveryAddress, deliveryMapUrl)
     window.open(href, '_blank', 'noopener,noreferrer')
   }

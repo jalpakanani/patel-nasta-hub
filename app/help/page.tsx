@@ -110,7 +110,10 @@ export default function HelpPage() {
           >
             મેનુ પર જાઓ
           </Link>
-          <GatedShopWhatsApp className="inline-flex min-h-11 w-full items-center justify-center rounded-full border-2 border-[#25D366] bg-[#25D366]/10 px-6 py-3 text-sm font-bold text-[#25D366] transition hover:bg-[#25D366]/15 sm:w-auto disabled:hover:bg-[#25D366]/10">
+          <GatedShopWhatsApp
+            analyticsPlacement="help_page"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-full border-2 border-[#25D366] bg-[#25D366]/10 px-6 py-3 text-sm font-bold text-[#25D366] transition hover:bg-[#25D366]/15 sm:w-auto disabled:hover:bg-[#25D366]/10"
+          >
             WhatsApp થી મદદ
           </GatedShopWhatsApp>
         </div>

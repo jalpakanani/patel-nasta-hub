@@ -33,7 +33,10 @@ export function SiteHeader() {
         <SiteHeaderNav row="bar" />
 
         <div className="flex shrink-0 items-center gap-2">
-          <GatedShopWhatsApp className="hidden items-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-2 text-sm font-semibold text-[#25D366] sm:inline-flex">
+          <GatedShopWhatsApp
+            analyticsPlacement="header"
+            className="hidden items-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-2 text-sm font-semibold text-[#25D366] sm:inline-flex"
+          >
             <IconWhatsApp className="h-4 w-4" />
             WhatsApp
           </GatedShopWhatsApp>

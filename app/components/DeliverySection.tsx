@@ -36,7 +36,10 @@ export function DeliverySection() {
                   કૉલ
                 </a>{" "}
                 કરો અથવા{" "}
-                <GatedShopWhatsApp className="inline-flex items-center gap-1 border-0 bg-transparent p-0 font-bold text-[#25D366] underline disabled:no-underline">
+                <GatedShopWhatsApp
+                  analyticsPlacement="delivery_section"
+                  className="inline-flex items-center gap-1 border-0 bg-transparent p-0 font-bold text-[#25D366] underline disabled:no-underline"
+                >
                   <IconWhatsApp className="h-4 w-4 shrink-0" />
                   WhatsApp
                 </GatedShopWhatsApp>{" "}

@@ -42,7 +42,10 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <GatedShopWhatsApp className="inline-flex items-center gap-2 border-0 bg-transparent p-0 text-left font-semibold text-[#25D366] hover:underline">
+                <GatedShopWhatsApp
+                  analyticsPlacement="footer"
+                  className="inline-flex items-center gap-2 border-0 bg-transparent p-0 text-left font-semibold text-[#25D366] hover:underline"
+                >
                   <IconWhatsApp className="h-4 w-4 shrink-0" />
                   WhatsApp ઓર્ડર
                 </GatedShopWhatsApp>

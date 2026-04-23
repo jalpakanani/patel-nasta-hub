@@ -3,6 +3,7 @@ import { Mukta_Vaani } from "next/font/google";
 import "./globals.css";
 import { AppOrderShell } from "@/app/components/AppOrderShell";
 import { SHOP } from "@/lib/branding";
+import { getGaDebugModeFields } from "@/lib/analytics";
 import { localBusinessJsonLd } from "@/lib/localBusinessJsonLd";
 
 const mukta = Mukta_Vaani({
@@ -17,12 +18,20 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-/** Site visit stats — `.env.local`: NEXT_PUBLIC_PLAUSIBLE_DOMAIN=patelnastahub.com OR NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXX */
+/** `.env.local`: NEXT_PUBLIC_PLAUSIBLE_DOMAIN અથવા NEXT_PUBLIC_GA_MEASUREMENT_ID=G-…; DebugView: NEXT_PUBLIC_GA_DEBUG_VIEW=true */
 const plausibleRaw = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN?.trim()
 const plausibleDomain =
   plausibleRaw && /^[\w.-]+$/.test(plausibleRaw) ? plausibleRaw : undefined
 const gaRaw = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
 const gaMeasurementId = gaRaw && /^G-[A-Z0-9]+$/i.test(gaRaw) ? gaRaw : undefined
+
+const gaTagInitConfigJson = gaMeasurementId
+  ? JSON.stringify({
+      send_page_view: false,
+      transport_type: "beacon",
+      ...getGaDebugModeFields(),
+    })
+  : ""
 
 export const metadata: Metadata = {
   metadataBase: new URL(SHOP.website),
@@ -64,14 +73,15 @@ export default function RootLayout({
         ) : null}
         {gaMeasurementId ? (
           <>
+            {/* Inline પહેલાં: `dataLayer` / `gtag` હંમેશા gtag.js લોડ પહેલાં તૈયાર */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}',${gaTagInitConfigJson});`,
+              }}
+            />
             <script
               async
               src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaMeasurementId)}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`,
-              }}
             />
           </>
         ) : null}
