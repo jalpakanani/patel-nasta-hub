@@ -18,9 +18,28 @@ function logGa(eventName: string, detail: Record<string, unknown>) {
   console.info(`[GA] ${eventName}`, detail)
 }
 
+function isValidGaMeasurementId(value: string): boolean {
+  return /^G-[A-Z0-9]+$/i.test(value)
+}
+
+/**
+ * `output: "export"` / Netlify પર ક્યારેક client chunk માં `NEXT_PUBLIC_*` ખૂટે છે,
+ * પણ layout માં gtag script હોય — ત્યાંથી `window` / `<meta>` થી ID લઈએ.
+ */
 function getGaMeasurementId(): string | undefined {
   const raw = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
-  return raw && /^G-[A-Z0-9]+$/i.test(raw) ? raw : undefined
+  if (raw && isValidGaMeasurementId(raw)) return raw
+  if (typeof window !== 'undefined') {
+    const fromWin = (window as unknown as { __GA4_MEASUREMENT_ID__?: string })
+      .__GA4_MEASUREMENT_ID__?.trim()
+    if (fromWin && isValidGaMeasurementId(fromWin)) return fromWin
+    const fromMeta = document
+      .querySelector('meta[name="ga4-measurement-id"]')
+      ?.getAttribute('content')
+      ?.trim()
+    if (fromMeta && isValidGaMeasurementId(fromMeta)) return fromMeta
+  }
+  return undefined
 }
 
 function getGtag(): GtagFn | undefined {

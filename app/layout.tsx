@@ -53,6 +53,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="gu" className={`${mukta.variable} h-full scroll-smooth`} style={{ colorScheme: "light" }}>
+      <head>
+        {gaMeasurementId ? (
+          <meta name="ga4-measurement-id" content={gaMeasurementId} />
+        ) : null}
+      </head>
       {/* Browser extensions (e.g. ColorZilla) inject body attrs — avoids dev hydration noise */}
       <body
         className="min-h-full bg-[var(--pn-cream)] pb-20 font-sans text-zinc-900 antialiased md:pb-0"
@@ -76,7 +81,7 @@ export default function RootLayout({
             {/* Inline પહેલાં: `dataLayer` / `gtag` હંમેશા gtag.js લોડ પહેલાં તૈયાર */}
             <script
               dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}',${gaTagInitConfigJson});`,
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.__GA4_MEASUREMENT_ID__='${gaMeasurementId}';gtag('js',new Date());gtag('config','${gaMeasurementId}',${gaTagInitConfigJson});`,
               }}
             />
             <script
