@@ -11,10 +11,6 @@ import {
   type ReactNode,
 } from 'react'
 import {SHOP} from '@/lib/branding'
-import {
-  DELIVERY_FEE_BELOW_THRESHOLD_INR,
-  DELIVERY_FREE_MIN_SUBTOTAL_INR,
-} from '@/lib/deliveryPricing'
 import {formatOrderSentAtIst} from '@/lib/formatOrderSentAtIst'
 import {menuCartItemKey, parsePriceInr} from '@/lib/menu'
 import {readSavedDelivery, writeSavedDelivery} from '@/lib/savedDeliveryLocation'
@@ -45,15 +41,8 @@ function buildWhatsAppMessage(
     .map(l => `${l.qty} × ${l.name} — ₹${l.priceInr * l.qty}`)
     .join('\n')
   const lineItemsSumInr = lines.reduce((s, l) => s + l.priceInr * l.qty, 0)
-  let totals = `\n\nવસ્તુઓ કુલ: ₹${subtotalInr}`
-  if (deliveryChargeInr > 0) {
-    totals += `\nડિલિવરી (ઓર્ડર ₹${DELIVERY_FREE_MIN_SUBTOTAL_INR}થી ઓછો): ₹${deliveryChargeInr}`
-  }
-  totals += `\nકુલ ચૂકવવાનું: ₹${grandTotalInr}`
-  const verifyLine =
-    deliveryChargeInr > 0
-      ? `\nચકાસણી (વસ્તુઓ નો સરવાળો  + ડિલિવરી): ₹${lineItemsSumInr} + ₹${deliveryChargeInr} = ₹${grandTotalInr}`
-      : `\nચકાસણી (વસ્તુઓ નો સરવાળો ): ₹${lineItemsSumInr} = વસ્તુઓ કુલ`
+  const totals = `\n\nવસ્તુઓ કુલ: ₹${subtotalInr}\nકુલ ચૂકવવાનું: ₹${grandTotalInr}`
+  const verifyLine = `\nચકાસણી (વસ્તુઓ નો સરવાળો): ₹${lineItemsSumInr} = વસ્તુઓ કુલ`
   const sentAt = `\n\nઓર્ડર મોકલ્યાનો સમય (IST): ${formatOrderSentAtIst()}`
   const addr = deliveryAddress.trim()
   const map = deliveryMapUrl.trim()
@@ -85,6 +74,9 @@ type OrderCartContextValue = {
   /** Header/footer WhatsApp જ્યારે સરનામું ખાલી — કાર્ટ ખોલી સરનામું પર ફોકસ */
   cartAddressFocusToken: number
   requestCartAddressFocus: () => void
+  /** હોમ ડિલિવરી માટે ₹300+ નહીં — કાર્ટ ખોલી સૂચના */
+  cartMinOrderFocusToken: number
+  requestCartMinOrderFocus: () => void
 }
 
 const OrderCartContext = createContext<OrderCartContextValue | null>(null)
@@ -102,10 +94,15 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
   const [deliveryAddress, setDeliveryAddress] = useState('')
   const [deliveryMapUrl, setDeliveryMapUrl] = useState('')
   const [cartAddressFocusToken, setCartAddressFocusToken] = useState(0)
+  const [cartMinOrderFocusToken, setCartMinOrderFocusToken] = useState(0)
   const skipFirstPersist = useRef(true)
 
   const requestCartAddressFocus = useCallback(() => {
     setCartAddressFocusToken(n => n + 1)
+  }, [])
+
+  const requestCartMinOrderFocus = useCallback(() => {
+    setCartMinOrderFocusToken(n => n + 1)
   }, [])
 
   useEffect(() => {
@@ -186,12 +183,8 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
     () => lines.reduce((s, l) => s + l.priceInr * l.qty, 0),
     [lines],
   )
-  const deliveryChargeInr = useMemo(() => {
-    if (subtotalInr <= 0) return 0
-    if (subtotalInr < DELIVERY_FREE_MIN_SUBTOTAL_INR)
-      return DELIVERY_FEE_BELOW_THRESHOLD_INR
-    return 0
-  }, [subtotalInr])
+  /** હોમ ડિલિવરી માત્ર ₹300+ પર; નીચે ફી નહીં — સેવા જ નથી */
+  const deliveryChargeInr = 0
   const totalInr = subtotalInr + deliveryChargeInr
 
   const whatsappMessage = useMemo(
@@ -232,6 +225,8 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
       whatsappMessage,
       cartAddressFocusToken,
       requestCartAddressFocus,
+      cartMinOrderFocusToken,
+      requestCartMinOrderFocus,
     }),
     [
       lines,
@@ -250,6 +245,8 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
       whatsappMessage,
       cartAddressFocusToken,
       requestCartAddressFocus,
+      cartMinOrderFocusToken,
+      requestCartMinOrderFocus,
     ],
   )
 

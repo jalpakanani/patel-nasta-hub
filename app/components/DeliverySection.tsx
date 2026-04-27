@@ -2,7 +2,10 @@ import Image from "next/image";
 import { SHOP } from "@/lib/branding";
 import { GatedShopWhatsApp } from "@/app/components/GatedShopWhatsApp";
 import { IconWhatsApp } from "@/app/components/BrandIcons";
-import { deliveryWebHighlightGu } from "@/lib/deliveryPricing";
+import {
+  HOME_DELIVERY_MIN_SUBTOTAL_INR,
+  deliveryWebHighlightGu,
+} from "@/lib/deliveryPricing";
 
 export function DeliverySection() {
   return (
@@ -66,7 +69,7 @@ export function DeliverySection() {
               {deliveryWebHighlightGu()}
             </p>
             <p className="rounded-2xl bg-[var(--pn-purple)]/5 p-4 text-sm text-zinc-600">
-              દુકાન {SHOP.openingHoursGu} ખુલ્લી રહે છે. ₹300+ ઓર્ડર પર 2 કિ.મી. સુધી ફ્રી ડિલિવરી.
+              દુકાન {SHOP.openingHoursGu} ખુલ્લી રહે છે. ₹{HOME_DELIVERY_MIN_SUBTOTAL_INR}+ ઓર્ડર પર 2 કિ.મી. સુધી ફ્રી ડિલિવરી.
               બાકીના કિસ્સામાં કૉલ પર વિગત મળશે.
             </p>
           </div>

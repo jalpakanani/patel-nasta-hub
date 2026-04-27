@@ -6,6 +6,7 @@ import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
 import { GatedShopWhatsApp } from "@/app/components/GatedShopWhatsApp";
 import { SHOP } from "@/lib/branding";
+import { HOME_DELIVERY_MIN_SUBTOTAL_INR } from "@/lib/deliveryPricing";
 
 export const metadata: Metadata = {
   title: `વેબ ઓર્ડર મદદ | ${SHOP.nameLatin}`,
@@ -23,7 +24,7 @@ const steps = [
   },
   {
     title: "રકમ અને ડિલિવરી જુઓ",
-    body: "આઇટમોનો ભાવ, ડિલિવરી ચાર્જ (ઓછા ઓર્ડર પર) અને કુલ રૂપિયા ચેક કરો. જરૂર હોય તો “કાર્ટ ખાલી કરો” થી ફેરફાર કરો.",
+    body: `આઇટમોનો ભાવ અને કુલ રૂપિયા ચેક કરો. હોમ ડિલિવરી માટે વસ્તુઓનો કુલ ઓછામાં ઓછો ₹${HOME_DELIVERY_MIN_SUBTOTAL_INR} જોઈએ — ઓછો હોય તો લીલું WhatsApp બટન નહીં ખુલે; વધુ આઇટમ ઉમેરો અથવા દુકાન પર પિકઅપ / કૉલ કરો. જરૂર હોય તો “કાર્ટ ખાલી કરો” થી ફેરફાર કરો.`,
   },
   {
     title: "સરનામું ફરજિયાત ભરો",

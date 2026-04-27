@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { startTransition, useEffect, useMemo, useState } from 'react'
 import { SHOP, shopWhatsAppHref } from '@/lib/branding'
 import { trackWhatsAppTap } from '@/lib/analytics'
 import { IconWhatsApp } from '@/app/components/BrandIcons'
@@ -8,7 +8,11 @@ import {
   ORDER_DELIVERY_ADDRESS_REQUIRED_GU,
   useOrderCart,
 } from '@/app/components/OrderCartProvider'
-import { deliveryBelowMinLabelGu } from '@/lib/deliveryPricing'
+import {
+  HOME_DELIVERY_MIN_SUBTOTAL_INR,
+  cartHomeDeliveryMinNoticeGu,
+  orderMinHomeDeliveryErrorGu,
+} from '@/lib/deliveryPricing'
 import { googleMapsPinUrlFromCoords } from '@/lib/googleMapsLinks'
 import { writeSavedDelivery } from '@/lib/savedDeliveryLocation'
 import {
@@ -24,7 +28,6 @@ export function OrderCartBar() {
     totalQty,
     totalInr,
     subtotalInr,
-    deliveryChargeInr,
     whatsappMessage,
     clear,
     increment,
@@ -35,20 +38,25 @@ export function OrderCartBar() {
     deliveryMapUrl,
     setDeliveryMapUrl,
     cartAddressFocusToken,
+    cartMinOrderFocusToken,
   } = useOrderCart()
 
   const [panelOpen, setPanelOpen] = useState(true)
   const [geoHint, setGeoHint] = useState<string | null>(null)
   const [addressError, setAddressError] = useState<string | null>(null)
+  const [minOrderError, setMinOrderError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (lines.length === 0) setPanelOpen(true)
+    if (lines.length === 0) startTransition(() => setPanelOpen(true))
   }, [lines.length])
 
   useEffect(() => {
     if (cartAddressFocusToken === 0 || lines.length === 0) return
-    setPanelOpen(true)
-    setAddressError(ORDER_DELIVERY_ADDRESS_REQUIRED_GU)
+    startTransition(() => {
+      setPanelOpen(true)
+      setMinOrderError(null)
+      setAddressError(ORDER_DELIVERY_ADDRESS_REQUIRED_GU)
+    })
     const id = window.requestAnimationFrame(() => {
       const el = document.getElementById('order-delivery-address')
       el?.focus({ preventScroll: true })
@@ -57,17 +65,62 @@ export function OrderCartBar() {
     return () => window.cancelAnimationFrame(id)
   }, [cartAddressFocusToken, lines.length])
 
+  useEffect(() => {
+    if (cartMinOrderFocusToken === 0 || lines.length === 0) return
+    startTransition(() => {
+      setPanelOpen(true)
+      setAddressError(null)
+      setMinOrderError(orderMinHomeDeliveryErrorGu(subtotalInr))
+    })
+    const id = window.requestAnimationFrame(() => {
+      const anchor =
+        document.getElementById('order-min-delivery-note') ??
+        document.getElementById('order-min-order-error')
+      anchor?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
+    return () => window.cancelAnimationFrame(id)
+  }, [cartMinOrderFocusToken, lines.length, subtotalInr])
+
+  useEffect(() => {
+    if (subtotalInr < HOME_DELIVERY_MIN_SUBTOTAL_INR) return
+    startTransition(() => {
+      setMinOrderError(null)
+    })
+  }, [subtotalInr])
+
+  const minDeliveryNotice = useMemo(
+    () => cartHomeDeliveryMinNoticeGu(subtotalInr),
+    [subtotalInr],
+  )
+
   if (lines.length === 0) return null
 
   const href = shopWhatsAppHref({ message: whatsappMessage })
 
   function openWhatsAppOrder() {
+    if (subtotalInr < HOME_DELIVERY_MIN_SUBTOTAL_INR) {
+      trackWhatsAppTap({
+        placement: 'cart_bar_order',
+        outcome: 'blocked_below_min_home_delivery',
+        cartLineCount: lines.length,
+      })
+      setAddressError(null)
+      setMinOrderError(orderMinHomeDeliveryErrorGu(subtotalInr))
+      window.requestAnimationFrame(() => {
+        const anchor =
+          document.getElementById('order-min-delivery-note') ??
+          document.getElementById('order-min-order-error')
+        anchor?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      })
+      return
+    }
     if (!deliveryAddress.trim()) {
       trackWhatsAppTap({
         placement: 'cart_bar_order',
         outcome: 'blocked_no_address',
         cartLineCount: lines.length,
       })
+      setMinOrderError(null)
       setAddressError(ORDER_DELIVERY_ADDRESS_REQUIRED_GU)
       const el = document.getElementById('order-delivery-address')
       el?.focus({ preventScroll: true })
@@ -75,6 +128,7 @@ export function OrderCartBar() {
       return
     }
     setAddressError(null)
+    setMinOrderError(null)
     trackWhatsAppTap({
       placement: 'cart_bar_order',
       outcome: 'opened',
@@ -139,9 +193,12 @@ export function OrderCartBar() {
             <p className="font-bold text-[var(--pn-purple-deep)]">
               {totalQty} વસ્તુ · કુલ ₹{totalInr}
             </p>
-            {deliveryChargeInr > 0 ? (
-              <p className="mt-0.5 text-xs font-medium text-zinc-600">
-                {`વસ્તુઓ ₹${subtotalInr} + ડિલિવરી ₹${deliveryChargeInr} (${deliveryBelowMinLabelGu()})`}
+            {minDeliveryNotice ? (
+              <p
+                id="order-min-delivery-note"
+                className="mt-0.5 text-xs font-semibold text-amber-900"
+              >
+                {minDeliveryNotice}
               </p>
             ) : null}
             <button
@@ -170,6 +227,15 @@ export function OrderCartBar() {
           </button>
         </div>
 
+        {minOrderError ? (
+          <p
+            id="order-min-order-error"
+            className="shrink-0 rounded-lg border border-red-300 bg-red-50 px-2.5 py-1.5 text-center text-[0.6875rem] font-bold leading-snug text-red-900"
+            role="alert"
+          >
+            {minOrderError}
+          </p>
+        ) : null}
         {addressError ? (
           <p
             id="order-address-error"

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SHOP } from "@/lib/branding";
+import { HOME_DELIVERY_MIN_SUBTOTAL_INR } from "@/lib/deliveryPricing";
 
 function DotPattern({ className }: { className?: string }) {
   return (
@@ -61,7 +62,7 @@ export function HeroFlyerCard() {
             ફ્રી હોમ ડિલિવરી
           </h2>
           <p className="relative z-[1] mt-1.5 text-center text-xs font-medium text-white/95 sm:mt-2 sm:text-sm">
-            ₹300 કે તેથી વધુના ઓર્ડર પર
+            ₹{HOME_DELIVERY_MIN_SUBTOTAL_INR} કે તેથી વધુના ઓર્ડર પર
           </p>
           <p className="relative z-[1] mt-1.5 text-center text-[11px] leading-snug text-white/85 sm:mt-2 sm:text-xs">
             Enjoy the ease of FREE delivery on all your favorite foods.

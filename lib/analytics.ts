@@ -86,6 +86,7 @@ export type WhatsAppTapOutcome =
   | 'opened'
   | 'blocked_no_cart'
   | 'blocked_no_address'
+  | 'blocked_below_min_home_delivery'
 
 export function trackWhatsAppTap(payload: {
   placement: string
