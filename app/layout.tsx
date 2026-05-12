@@ -42,7 +42,13 @@ export const metadata: Metadata = {
     title: `${SHOP.name} | ${SHOP.nameLatin}`,
     description: SHOP.tagline,
     locale: "gu_IN",
-    images: [{ url: SHOP.logoSrc, alt: SHOP.nameLatin }],
+    images: [{ url: SHOP.logoOgSrc, alt: SHOP.nameLatin }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SHOP.name} | ${SHOP.nameLatin}`,
+    description: SHOP.tagline,
+    images: [SHOP.logoOgSrc],
   },
 };
 

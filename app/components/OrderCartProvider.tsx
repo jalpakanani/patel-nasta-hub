@@ -12,7 +12,7 @@ import {
 } from 'react'
 import {SHOP} from '@/lib/branding'
 import {formatOrderSentAtIst} from '@/lib/formatOrderSentAtIst'
-import {menuCartItemKey, parsePriceInr} from '@/lib/menu'
+import {menuCartItemKey, parsePriceInr, gramsPerCartStepForCartKey, formatGuWeightLabel} from '@/lib/menu'
 import {readSavedDelivery, writeSavedDelivery} from '@/lib/savedDeliveryLocation'
 
 /** કાર્ટ / બહારનો WhatsApp — સરનામું ખાલી હોય ત્યારે */
@@ -38,7 +38,12 @@ function buildWhatsAppMessage(
   if (lines.length === 0) return SHOP.whatsappOrderMessageGu
   const header = `નમસ્તે ${SHOP.name},\n\nઓર્ડર:\n`
   const body = lines
-    .map(l => `${l.qty} × ${l.name} — ₹${l.priceInr * l.qty}`)
+    .map(l => {
+      const stepG = gramsPerCartStepForCartKey(l.key)
+      const weightGu =
+        stepG != null ? ` (${formatGuWeightLabel(l.qty, stepG)})` : ''
+      return `${l.qty} × ${l.name}${weightGu} — ₹${l.priceInr * l.qty}`
+    })
     .join('\n')
   const lineItemsSumInr = lines.reduce((s, l) => s + l.priceInr * l.qty, 0)
   const totals = `\n\nવસ્તુઓ કુલ: ₹${subtotalInr}\nકુલ ચૂકવવાનું: ₹${grandTotalInr}`

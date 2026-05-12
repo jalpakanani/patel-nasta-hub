@@ -21,7 +21,7 @@ export function localBusinessJsonLd() {
     url: website,
     telephone: SHOP.phoneTel,
     
-    image: `${origin}${SHOP.logoSrc}`,
+    image: `${origin}${SHOP.logoOgSrc}`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: SHOP.addressLines.join(', '),

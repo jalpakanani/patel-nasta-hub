@@ -6,7 +6,10 @@ const WHATSAPP_ORDER_MESSAGE_GU =
 export const SHOP = {
   name: 'પટેલ નાસ્તા હબ',
   nameLatin: 'Patel Nasta Hub',
+  /** Header / in-page — light-friendly asset */
   logoSrc: '/images/logo-brand.png',
+  /** WhatsApp, Facebook, Telegram link preview (`og:image`) — dark background */
+  logoOgSrc: '/images/logo-main.png',
   tagline: 'સ્વાદ જે દિલ સુધી પહોંચે',
   phoneDisplay: '+91 96648 59253',
   phoneTel: '+919664859253',
