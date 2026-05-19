@@ -8,7 +8,7 @@ export type MenuItem = {
   note?: string
   /** Small badges on menu cards */
   tags?: readonly string[]
-  /** First matching item drives the home featured strip */
+  /** `true` હોય તો ફેમસ સ્ટ્રીપમાં કાર્ડ — મેનુ ક્રમ મુજબ */
   featured?: boolean
   /** Hero image for featured strip; defaults to `image` */
   featureImage?: string
@@ -78,6 +78,11 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         name: 'દાબેલી',
         price: '₹30',
         image: '/images/dabeli-menu.png',
+        featured: true,
+        featureImage: '/images/dabeli-menu.png',
+        nameLatin: 'Dabeli',
+        featureDescriptionGu:
+          'કચ્છી સ્ટાઇલની મસાલેદાર દાબેલી — ગરમ ગરમ પાઉં, ચટણી અને સેવ સાથે. અમારી દુકાનની લોકપ્રિય સ્નેક્સ આઇટમ, દર વખતે તાજી બને છે.',
         tags: ['ક્લાસિક'],
       },
       {
@@ -188,6 +193,11 @@ export const MENU_CATEGORIES: MenuCategory[] = [
         price: '₹80',
         image: '/images/menu-cheese-masala-maggi.png',
       },
+      {
+        name: 'પટેલ સ્પેશિયલ મેગી (તડકા)',
+        price: '₹100',
+        image: '/images/menu-patel-special-meggi.png',
+      },
     ],
   },
   {
@@ -222,17 +232,21 @@ export function gramsPerCartStepForCartKey(cartKey: string): number | undefined 
   return cat?.items.find(it => it.name === itemName)?.gramsPerCartStep
 }
 
-export function getFeaturedSpotlight(): {
+export type FeaturedSpotlight = {
   name: string
   price: string
   image: string
   nameLatin?: string
   descriptionGu: string
-} | null {
+}
+
+/** બધી `featured: true` આઇટમ — મેનુ ક્રમ મુજબ */
+export function getFeaturedSpotlights(): FeaturedSpotlight[] {
+  const out: FeaturedSpotlight[] = []
   for (const cat of MENU_CATEGORIES) {
     for (const item of cat.items) {
       if (item.featured) {
-        return {
+        out.push({
           name: item.name,
           price: item.price,
           image: item.featureImage ?? item.image,
@@ -241,11 +255,11 @@ export function getFeaturedSpotlight(): {
             item.featureDescriptionGu ??
             item.note ??
             'અમારી દુકાનની ખાસ ભલામણ.',
-        }
+        })
       }
     }
   }
-  return null
+  return out
 }
 
 export const MENU_NOTES = [
