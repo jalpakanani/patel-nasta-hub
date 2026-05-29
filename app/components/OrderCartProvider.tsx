@@ -34,6 +34,7 @@ function buildWhatsAppMessage(
   grandTotalInr: number,
   deliveryAddress: string,
   deliveryMapUrl: string,
+  orderNote: string,
 ): string {
   if (lines.length === 0) return SHOP.whatsappOrderMessageGu
   const header = `નમસ્તે ${SHOP.name},\n\nઓર્ડર:\n`
@@ -51,6 +52,7 @@ function buildWhatsAppMessage(
   const sentAt = `\n\nઓર્ડર મોકલ્યાનો સમય (IST): ${formatOrderSentAtIst()}`
   const addr = deliveryAddress.trim()
   const map = deliveryMapUrl.trim()
+  const note = orderNote.trim()
   let locationBlock = ''
   if (addr || map) {
     locationBlock = '\n\n'
@@ -58,7 +60,8 @@ function buildWhatsAppMessage(
     if (addr && map) locationBlock += '\n\n'
     if (map) locationBlock += `Google Maps લોકેશન:\n${map}`
   }
-  return `${header}${body}${totals}${verifyLine}${sentAt}${locationBlock}\n\n${SHOP.whatsappOrderIntegrityNoteGu}\n\n${SHOP.whatsappOrderMustCallGu}`
+  const noteBlock = note ? `\n\nવિશેષ સૂચના / નોંધ:\n${note}` : ''
+  return `${header}${body}${totals}${verifyLine}${sentAt}${locationBlock}${noteBlock}\n\n${SHOP.whatsappOrderIntegrityNoteGu}\n\n${SHOP.whatsappOrderMustCallGu}`
 }
 
 type OrderCartContextValue = {
@@ -71,6 +74,8 @@ type OrderCartContextValue = {
   setDeliveryAddress: (value: string) => void
   deliveryMapUrl: string
   setDeliveryMapUrl: (value: string) => void
+  orderNote: string
+  setOrderNote: (value: string) => void
   totalQty: number
   subtotalInr: number
   deliveryChargeInr: number
@@ -98,6 +103,7 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
   const [byKey, setByKey] = useState<Record<string, CartLine>>({})
   const [deliveryAddress, setDeliveryAddress] = useState('')
   const [deliveryMapUrl, setDeliveryMapUrl] = useState('')
+  const [orderNote, setOrderNote] = useState('')
   const [cartAddressFocusToken, setCartAddressFocusToken] = useState(0)
   const [cartMinOrderFocusToken, setCartMinOrderFocusToken] = useState(0)
   const skipFirstPersist = useRef(true)
@@ -114,6 +120,7 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
     const s = readSavedDelivery()
     if (s?.address) setDeliveryAddress(s.address)
     if (s?.mapUrl) setDeliveryMapUrl(s.mapUrl)
+    if (s?.orderNote) setOrderNote(s.orderNote)
   }, [])
 
   useEffect(() => {
@@ -122,10 +129,10 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
       return
     }
     const id = window.setTimeout(() => {
-      writeSavedDelivery(deliveryAddress, deliveryMapUrl)
+      writeSavedDelivery(deliveryAddress, deliveryMapUrl, orderNote)
     }, 650)
     return () => window.clearTimeout(id)
-  }, [deliveryAddress, deliveryMapUrl])
+  }, [deliveryAddress, deliveryMapUrl, orderNote])
 
   const lines = useMemo(
     () =>
@@ -201,6 +208,7 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
         totalInr,
         deliveryAddress,
         deliveryMapUrl,
+        orderNote,
       ),
     [
       lines,
@@ -209,6 +217,7 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
       totalInr,
       deliveryAddress,
       deliveryMapUrl,
+      orderNote,
     ],
   )
 
@@ -223,6 +232,8 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
       setDeliveryAddress,
       deliveryMapUrl,
       setDeliveryMapUrl,
+      orderNote,
+      setOrderNote,
       totalQty,
       subtotalInr,
       deliveryChargeInr,
@@ -243,6 +254,8 @@ export function OrderCartProvider({children}: {children: ReactNode}) {
       setDeliveryAddress,
       deliveryMapUrl,
       setDeliveryMapUrl,
+      orderNote,
+      setOrderNote,
       totalQty,
       subtotalInr,
       deliveryChargeInr,

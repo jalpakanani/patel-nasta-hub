@@ -37,6 +37,8 @@ export function OrderCartBar() {
     setDeliveryAddress,
     deliveryMapUrl,
     setDeliveryMapUrl,
+    orderNote,
+    setOrderNote,
     cartAddressFocusToken,
     cartMinOrderFocusToken,
   } = useOrderCart()
@@ -134,7 +136,7 @@ export function OrderCartBar() {
       outcome: 'opened',
       cartLineCount: lines.length,
     })
-    writeSavedDelivery(deliveryAddress, deliveryMapUrl)
+    writeSavedDelivery(deliveryAddress, deliveryMapUrl, orderNote)
     window.open(href, '_blank', 'noopener,noreferrer')
   }
 
@@ -361,6 +363,29 @@ export function OrderCartBar() {
                 />
                 <p className="mt-1 text-[0.625rem] leading-snug text-zinc-500">
                   આ ફોન/બ્રાઉઝર પર યાદ રાખાશે — બીજા સરનામે ઓર્ડર હોય તો અહીં બદલી લખો.
+                </p>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="order-special-note"
+                  className="block text-[0.6875rem] font-bold text-zinc-800"
+                >
+                  વિશેષ સૂચના / નોંધ{' '}
+                  <span className="font-normal text-zinc-500">(વૈકલ્પિક)</span>
+                </label>
+                <textarea
+                  id="order-special-note"
+                  name="orderNote"
+                  value={orderNote}
+                  onChange={e => setOrderNote(e.target.value)}
+                  rows={2}
+                  autoComplete="off"
+                  placeholder="દા.ત. જૈન, એક્સ્ટ્રા ચીઝ, ઓછું તીખું…"
+                  className="mt-1 w-full resize-y rounded-lg border border-zinc-200 bg-white px-2.5 py-2 text-sm leading-snug text-zinc-900 shadow-inner outline-none placeholder:text-zinc-400 focus:border-[var(--pn-purple)] focus:ring-1 focus:ring-[var(--pn-purple)]/25"
+                />
+                <p className="mt-1 text-[0.625rem] leading-snug text-zinc-500">
+                  WhatsApp ઓર્ડર મેસેજમાં સાથે જશે — જરૂર હોય તો જ લખો.
                 </p>
               </div>
 

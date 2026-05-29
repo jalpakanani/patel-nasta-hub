@@ -27,6 +27,7 @@ export function GatedShopWhatsApp({
     whatsappMessage,
     deliveryAddress,
     deliveryMapUrl,
+    orderNote,
     requestCartAddressFocus,
     requestCartMinOrderFocus,
   } = useOrderCart()
@@ -107,7 +108,7 @@ export function GatedShopWhatsApp({
           outcome: 'opened',
           cartLineCount: lines.length,
         })
-        writeSavedDelivery(deliveryAddress, deliveryMapUrl)
+        writeSavedDelivery(deliveryAddress, deliveryMapUrl, orderNote)
       }}
     >
       {children}
