@@ -3,6 +3,8 @@ const STORAGE_KEY = 'pn:delivery:last' as const
 type StoredV1 = { v: 1; address: string; mapUrl: string }
 type StoredV2 = { v: 2; address: string; mapUrl: string; orderNote: string }
 
+type StoredDelivery = StoredV1 | StoredV2
+
 export function readSavedDelivery(): {
   address: string
   mapUrl: string
@@ -12,7 +14,7 @@ export function readSavedDelivery(): {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return null
-    const p = JSON.parse(raw) as Partial<StoredV1 & StoredV2>
+    const p = JSON.parse(raw) as Partial<StoredDelivery>
     if (p?.v === 2) {
       return {
         address: typeof p.address === 'string' ? p.address : '',
