@@ -6,7 +6,7 @@
     "dev": "next dev -H 0.0.0.0 --webpack",
     "dev:turbo": "next dev -H 0.0.0.0",
     "lan:url": "node scripts/print-lan-url.cjs",
-    "build": "next build",
+    "build": "node scripts/write-ads-txt.cjs && next build",
     "start": "next start",
     "lint": "eslint"
   },

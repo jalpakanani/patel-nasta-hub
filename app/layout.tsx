@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppOrderShell } from "@/app/components/AppOrderShell";
 import { SHOP } from "@/lib/branding";
 import { getGaDebugModeFields } from "@/lib/analytics";
+import { getAdsenseClientId } from "@/lib/adsense";
 import { localBusinessJsonLd } from "@/lib/localBusinessJsonLd";
 
 const mukta = Mukta_Vaani({
@@ -18,12 +19,13 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-/** `.env.local`: NEXT_PUBLIC_PLAUSIBLE_DOMAIN અથવા NEXT_PUBLIC_GA_MEASUREMENT_ID=G-…; DebugView: NEXT_PUBLIC_GA_DEBUG_VIEW=true */
+/** `.env.local`: NEXT_PUBLIC_PLAUSIBLE_DOMAIN, NEXT_PUBLIC_GA_MEASUREMENT_ID, NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-… */
 const plausibleRaw = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN?.trim()
 const plausibleDomain =
   plausibleRaw && /^[\w.-]+$/.test(plausibleRaw) ? plausibleRaw : undefined
 const gaRaw = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
 const gaMeasurementId = gaRaw && /^G-[A-Z0-9]+$/i.test(gaRaw) ? gaRaw : undefined
+const adsenseClientId = getAdsenseClientId()
 
 const gaTagInitConfigJson = gaMeasurementId
   ? JSON.stringify({
@@ -62,6 +64,16 @@ export default function RootLayout({
       <head>
         {gaMeasurementId ? (
           <meta name="ga4-measurement-id" content={gaMeasurementId} />
+        ) : null}
+        {adsenseClientId ? (
+          <>
+            <meta name="google-adsense-account" content={adsenseClientId} />
+            <script
+              async
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(adsenseClientId)}`}
+              crossOrigin="anonymous"
+            />
+          </>
         ) : null}
       </head>
       {/* Browser extensions (e.g. ColorZilla) inject body attrs — avoids dev hydration noise */}

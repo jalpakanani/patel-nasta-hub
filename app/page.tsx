@@ -1,3 +1,4 @@
+import { AdSenseBanner } from "./components/AdSenseBanner";
 import { DeliverySection } from "./components/DeliverySection";
 import { FeaturedStrip } from "./components/FeaturedStrip";
 import { HomeSplashGate } from "./components/HomeSplashGate";
@@ -16,6 +17,7 @@ export default function Home() {
       <main className="pb-28 md:pb-0">
         <HeroSection />
         <FeaturedStrip />
+        <AdSenseBanner />
         <MenuSection />
         <DeliverySection />
         <PaymentSection />
